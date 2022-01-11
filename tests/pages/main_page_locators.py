@@ -8,9 +8,8 @@ class LogInPopupLocators:
 
 
 class MainPageLocators:
-    ACCEPT_COOKIES_BUTTON = (by.xpath("//div[@id='cookie-popup-with-overlay']//button"
-                                      "[@class='cookie-popup-with-overlay__button']")
-                             )
+    ACCEPT_COOKIES_BUTTON = (by.xpath("""//div[@id='cookie-popup-with-overlay']//button
+        [@class='cookie-popup-with-overlay__button']"""))
     FRAME_DATEPICKER = (by.xpath("//iframe[@id='_hjRemoteVarsFrame']"))
     SEARCH_CARS_TAB = (by.xpath("//hp-search-widget-tab[@iconid='glyphs/cars']"))
     SEARCH_FLIGHTS_TAB = (by.xpath("//hp-search-widget-tab[@iconid='glyphs/plane']"))
