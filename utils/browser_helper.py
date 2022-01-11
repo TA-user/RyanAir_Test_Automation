@@ -2,9 +2,12 @@ from loguru import logger
 from selene import be
 from selenium.common.exceptions import NoSuchElementException, ElementNotVisibleException, \
     ElementNotInteractableException, TimeoutException
+from utils.logging import Logger
 
 
 class ElementInteractions:
+    Logger.set_logger()
+
     def __init__(self, browser):
         self.browser = browser
 
