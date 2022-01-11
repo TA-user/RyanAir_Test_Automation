@@ -11,7 +11,6 @@ class ElementInteractions:
         self.browser = browser
 
     def find_element(self, selector):
-        logger.debug(f'Trying to find element "{selector}"...')
         try:
             element = self.browser.element(selector).should(be.visible)
         except TimeoutException:
@@ -22,7 +21,6 @@ class ElementInteractions:
 
     def click_element(self, selector):
         element = self.find_element(selector)
-        logger.debug(f'Trying to click an element "{selector}"...')
         try:
             element.should(be.clickable).click()
         except TimeoutException:
@@ -32,7 +30,6 @@ class ElementInteractions:
 
     def send_text_in_field(self, selector, text):
         element = self.find_element(selector)
-        logger.debug(f'Trying to send "{text}" in element "{selector}"...')
         try:
             element.should(be.blank).type(text)
         except TimeoutException:
@@ -41,7 +38,7 @@ class ElementInteractions:
         logger.debug(f'{text} is sent in element "{selector}"...')
 
     def clear_field(self, selector):
-        element = self.browser.element(selector).should(be.clickable)
+        element = self.find_element(selector)
         try:
             element.should(be.blank).clear()
         except TimeoutException:
