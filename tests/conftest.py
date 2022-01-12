@@ -20,12 +20,10 @@ def browser(request):
     if browser_name == "chrome":
         browser = webdriver.Chrome(executable_path=ChromeDriverManager().install())
     elif browser_name == "firefox":
-
         browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())
     elif browser_name == "edge":
         desired_cap = {}
         browser = Edge(executable_path=EdgeChromiumDriverManager().install(), desired_capabilities=desired_cap)
-
     else:
         raise pytest.UsageError("--browser name should be chrome or firefox or edge")
     browser.maximize_window()
