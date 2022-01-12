@@ -5,11 +5,11 @@ name = "pypi"
 
 [packages]
 pytest = "*"
-selene = "==2.0.0a39"
 allure-pytest = "*"
 msedge-selenium-tools = "*"
+selenium = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.8"
+python_version = "3.10"

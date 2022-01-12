@@ -1,11 +1,10 @@
 import allure
 import os
 import pytest
-from selenium import webdriver
-
 from msedge.selenium_tools import Edge
-from selene.support.shared import browser as selene_browser
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.options import Options as FireFoxOptions
+from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
@@ -16,34 +15,31 @@ def pytest_addoption(parser):
                      help="Choose browser: chrome or firefox or edge")
 
 
-@pytest.fixture(scope='package', autouse=True)
+@pytest.fixture(scope="package")
 def browser(request):
     browser_name = request.config.getoption("browser_name")
+    browser = None
     if browser_name == "chrome":
         options = Options()
         options.add_argument("--window-size=1920,1080")
-        chrome_driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), options=options)
-
-        selene_browser.config.driver = chrome_driver
-
+        browser = webdriver.Chrome(executable_path=ChromeDriverManager().install(), options=options)
     elif browser_name == "firefox":
-
-        firefox_driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
-        firefox_driver.set_window_size(1920, 1080)
-
-        selene_browser.config.driver = firefox_driver
-
+        fp = webdriver.FirefoxProfile()
+        firefox_options = FireFoxOptions()
+        firefox_options.add_argument("--width=1920")
+        firefox_options.add_argument("--height=1080")
+        browser = webdriver.Firefox(executable_path=GeckoDriverManager().install(), firefox_profile=fp,
+                                    options=firefox_options)
     elif browser_name == "edge":
         desired_cap = {}
-        edge_driver = Edge(EdgeChromiumDriverManager().install(), capabilities=desired_cap)
-        edge_driver.set_window_size(1920, 1080)
-
-        selene_browser.config.driver = edge_driver
+        browser = Edge(executable_path=EdgeChromiumDriverManager().install(),
+                       desired_capabilities=desired_cap)
+        browser.set_window_size(1920, 1080)
 
     else:
-        raise pytest.UsageError("--browser name should be chrome or firefox")
-    yield selene_browser
-    selene_browser.quit()
+        raise pytest.UsageError("--browser name should be chrome or firefox or edge")
+    yield browser
+    browser.quit()
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
