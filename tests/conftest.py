@@ -12,10 +12,11 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
 
 def pytest_addoption(parser):
-    parser.addoption("--browser_name", action="store", default="chrome", help="Choose browser: chrome or firefox")
+    parser.addoption("--browser_name", action="store", default="chrome",
+                     help="Choose browser: chrome or firefox or edge")
 
 
-@pytest.fixture(scope='function', autouse=True)
+@pytest.fixture(scope='package', autouse=True)
 def browser(request):
     browser_name = request.config.getoption("browser_name")
     if browser_name == "chrome":
