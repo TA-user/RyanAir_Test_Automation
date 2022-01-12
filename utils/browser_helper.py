@@ -1,47 +1,61 @@
 from loguru import logger
-from selene import be
-from selene.core.exceptions import TimeoutException
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.common.exceptions import WebDriverException
+from selenium.webdriver.support import expected_conditions as EC
 from utils.logging import Logger
+
+# MOVE THIS VARIABLE TO CONFIG.PY FILE
+wait_time_s = 5
 
 
 class ElementInteractions:
-    Logger.set_logger()
+    Logger.set_logger(Logger())
 
     def __init__(self, browser):
         self.browser = browser
 
-    def find_element(self, selector):
+    def find_visible_element(self, selector):
         try:
-            element = self.browser.element(selector).should(be.visible)
-        except TimeoutException:
-            logger.error(f'Cannot find element "{selector}"!')
+            element = WebDriverWait(self.browser, wait_time_s).until(EC.visibility_of_element_located(selector))
+        except WebDriverException:
+            logger.error(f'Cannot find visible element "{selector}"!')
+            raise
+        logger.debug(f'Element "{selector}" was found...')
+        return element
+
+    def find_clickable_element(self, selector):
+        try:
+            element = WebDriverWait(self.browser, wait_time_s).until(EC.element_to_be_clickable(selector))
+        except WebDriverException:
+            logger.error(f'Cannot find clickable element "{selector}"!')
             raise
         logger.debug(f'Element "{selector}" was found...')
         return element
 
     def click_element(self, selector):
-        element = self.find_element(selector)
+        element = self.find_clickable_element(selector)
         try:
-            element.should(be.clickable).click()
-        except TimeoutException:
+            element.click()
+        except WebDriverException:
             logger.error(f'Cannot click an element "{selector}"...')
             raise
         logger.debug(f'Element "{selector}" clicked...')
 
     def send_text_in_field(self, selector, text):
-        element = self.find_element(selector)
+        element = self.find_clickable_element(selector)
+        element.clear()
         try:
-            element.should(be.blank).type(text)
-        except TimeoutException:
+            element.send_keys(text)
+        except WebDriverException:
             logger.error(f'Cannot send {text} in element "{selector}"...')
             raise
         logger.debug(f'{text} is sent in element "{selector}"...')
 
     def clear_field(self, selector):
-        element = self.find_element(selector)
+        element = self.find_clickable_element(selector)
         try:
-            element.should(be.blank).clear()
-        except TimeoutException:
-            logger.error(f'Cannot clear element "{selector}"...')
+            element.clear()
+        except WebDriverException:
+            logger.error(f'Cannot clear field, located "{selector}"...')
             raise
         logger.debug(f'Field, located "{selector}" cleared...')
