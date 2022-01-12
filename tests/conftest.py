@@ -32,8 +32,7 @@ def browser(request):
                                     options=firefox_options)
     elif browser_name == "edge":
         desired_cap = {}
-        browser = Edge(executable_path=EdgeChromiumDriverManager().install(),
-                       desired_capabilities=desired_cap)
+        browser = Edge(executable_path=EdgeChromiumDriverManager().install(), desired_capabilities=desired_cap)
         browser.set_window_size(1920, 1080)
 
     else:

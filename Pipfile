@@ -4,9 +4,10 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pytest = "*"
 allure-pytest = "*"
+assertpy = "*"
 msedge-selenium-tools = "*"
+pytest = "*"
 selenium = "*"
 
 [dev-packages]
