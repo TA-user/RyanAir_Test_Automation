@@ -9,6 +9,7 @@ assertpy = "*"
 msedge-selenium-tools = "*"
 pytest = "*"
 selenium = "*"
+webdrivermanager = "*"
 
 [dev-packages]
 
