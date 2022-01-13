@@ -8,11 +8,9 @@ from utils.logging import Logger
 class Assertions(ElementInteractions):
     """
     Object instance of Assertions class should initialize in BasePage class. And it would be used by perforce.
-    Example usage
+    Example usage:
     assertions.element_should_be_clickable(MainPageLocators.ADD_ITEM)
-    assertions.element_should_be_visible(MainPageHeaderLocators.USER_MENU)
     assertions.element_should_contain_text(MainPageHeaderLocators.USER_MENU, 'user')
-    assertions.phrase_should_contain_element_text(MainPageHeaderLocators.USER_MENU, 'user')
     """
     
     Logger.set_logger(Logger())
