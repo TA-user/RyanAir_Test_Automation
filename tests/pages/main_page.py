@@ -8,7 +8,7 @@ class MainPage(BasePage):
         self.element_interactions.click_element(MainPageLocators.ACCEPT_COOKIES_BUTTON)
 
     def open_search_cars_tab(self):
-        self.element_interactions.click_element(MainPageLocators.SEARCH_FLIGHTS_TAB)
+        self.element_interactions.click_element(MainPageLocators.SEARCH_CARS_TAB)
 
 
 class MainPageSearchFlightsTab(BasePage):
@@ -20,25 +20,14 @@ class MainPageSearchHotelsTab(BasePage):
 
 
 class MainPageCarHireTab(BasePage):
-    def __init__(self, *args, **kwargs):
-        super(MainPageCarHireTab, self).__init__(*args, **kwargs)
-        self.pick_up_location = None
-        self.pick_up_year_month_day = None
-        self.pick_up_time = None
-        self.drop_off_year_month_day = None
-        self.drop_off_time = None
-
     def perform_car_sharing(self, pick_up_location: str, pick_up_year_month_day: str, pick_up_time: str,
                             drop_off_year_month_day: str, drop_off_time: str):
-        self.pick_up_year_month_day = pick_up_year_month_day
-        self.pick_up_time = pick_up_time
-        self.drop_off_year_month_day = drop_off_year_month_day
-        self.drop_off_time = drop_off_time
-        self.choose_pick_up_location()
-        self.choose_pick_up_date()
-        self.choose_drop_off_date()
-        self.choose_pick_up_time()
-        self.choose_drop_off_time()
+
+        self.choose_pick_up_location(pick_up_location)
+        self.choose_pick_up_date(pick_up_year_month_day)
+        self.choose_drop_off_date(drop_off_year_month_day)
+        self.choose_pick_up_time(pick_up_time)
+        self.choose_drop_off_time(drop_off_time)
         self.click_submit_button()
 
     def choose_pick_up_location(self, pick_up_location):
