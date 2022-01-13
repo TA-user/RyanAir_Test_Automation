@@ -47,3 +47,21 @@ class SearchHotelsTabLocators:
     FIRST_ITEM_HOTEL_DROPDOWN = (By.XPATH, "//icon[@iconid='glyphs/destination-pin']")
     DESTINATION_HOTEL_FORM = (By.XPATH, "//*[@id='input-button__locations-or-properties']")
     SEARCH_HOTEL_BUTTON = (By.XPATH, "//button[@data-ref='rooms-search-widget__cta']")
+
+
+class CalendarWidgetLocators:
+    CHOOSE_MONTH_BUTTON_LOCATOR_PATTERN = "//div[text()=' {month} ']"  # Jan
+    CHOOSE_DAY_OF_MONTH_LOCATOR_PATTERN = "[data-id='{date}']"  # date yyyy-mm-dd
+    TIME_DDM_ELEMENT_PATTERN = "//ry-tooltip[@role='tooltip']//*[text()='{time}']"
+
+    @classmethod
+    def get_calendar_month_button_locator(cls, month: str) -> tuple:
+        return By.XPATH, cls.CHOOSE_MONTH_BUTTON_LOCATOR_PATTERN.format(month=month.title())
+
+    @classmethod
+    def get_calendar_day_button_locator(cls, date: str) -> tuple:
+        return By.CSS_SELECTOR, cls.CHOOSE_DAY_OF_MONTH_LOCATOR_PATTERN.format(date=date)
+
+    @classmethod
+    def get_time_in_ddm_locator(cls, time_="00:00") -> tuple:
+        return By.XPATH, cls.TIME_DDM_ELEMENT_PATTERN.format(time=time_)
