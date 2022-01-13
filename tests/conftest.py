@@ -6,6 +6,8 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
+from tests.data.urls import Urls
+from tests.pages.main_page import MainPage, MainPageCarHireTab, MainPageSearchFlightsTab, MainPageSearchHotelsTab
 
 
 def pytest_addoption(parser):
@@ -51,3 +53,23 @@ def pytest_runtest_makereport(item, call):
             )
         except Exception as e:
             print('Fail to take screen-shot: {}'.format(e))
+
+
+@pytest.fixture(scope="module")
+def main_page(browser):
+    return MainPage(browser=browser, url=Urls.MAIN_PAGE_URL)
+
+
+@pytest.fixture(scope="module")
+def main_page_search_flights_tab(browser):
+    return MainPageSearchFlightsTab(browser=browser, url=browser.current_url)
+
+
+@pytest.fixture(scope="module")
+def main_page_car_hire_tab(browser):
+    return MainPageCarHireTab(browser=browser, url=browser.current_url)
+
+
+@pytest.fixture(scope="module")
+def main_page_search_hotels_tab(browser):
+    return MainPageSearchHotelsTab(browser=browser, url=browser.current_url)
