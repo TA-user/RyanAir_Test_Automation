@@ -69,3 +69,4 @@ class MainPageCarHireTab(BasePage):
 
     def click_submit_button(self):
         self.element_interactions.click_element(SearchCarsTabLocators.SEARCH_CARS_BUTTON)
+        
