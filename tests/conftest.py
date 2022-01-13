@@ -6,8 +6,8 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
-from tests.data.urls import Urls
-from tests.pages.main_page import MainPage, MainPageCarHireTab, MainPageSearchFlightsTab, MainPageSearchHotelsTab
+from config import MAIN_PAGE_URL
+from tests.pages.main_page import MainPage, MainPageCarHireTab, MainPageSearchHotelsTab, MainPageSearchFlightsTab
 
 
 def pytest_addoption(parser):
@@ -57,7 +57,7 @@ def pytest_runtest_makereport(item, call):
 
 @pytest.fixture(scope="module")
 def main_page(browser):
-    return MainPage(browser=browser, url=Urls.MAIN_PAGE_URL)
+    return MainPage(browser=browser, url=MAIN_PAGE_URL)
 
 
 @pytest.fixture(scope="module")
