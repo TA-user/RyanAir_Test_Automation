@@ -49,6 +49,19 @@ class SearchHotelsTabLocators:
     SEARCH_HOTEL_BUTTON = (By.XPATH, "//button[@data-ref='rooms-search-widget__cta']")
 
 
+class CarHirePageLocators:
+    PICK_UP_DAY = (By.CSS_SELECTOR, "td.ab-SearchSummary_PickUp-day")
+    PICK_UP_CITY = (By.CSS_SELECTOR, "div.ab-SearchSummary_PickUp_City")
+    PICK_UP_HOUR = (By.CSS_SELECTOR, "td.ab-SearchSummary_PickUp-hour")
+    PICK_UP_MINUTE = (By.CSS_SELECTOR, "div.ab-SearchSummary_PickUp-minute")
+    DROP_OFF_DAY = (By.CSS_SELECTOR, "td.ab-SearchSummary_DropOff-day")
+    DROP_OFF_CITY = (By.CSS_SELECTOR, "div.ab-SearchSummary_DropOff_City")
+    DROP_OFF_HOUR = (By.CSS_SELECTOR, "td.ab-SearchSummary_DropOff-hour")
+    DROP_OFF_MINUTE = (By.CSS_SELECTOR, "div.ab-SearchSummary_DropOff-minute")
+    CHEAPEST_CARS_BUTTON = (By.CSS_SELECTOR, "tbody .price-from > a")
+    FIRST_CAR_VIEW_DEAL_BUTTON = (By.CSS_SELECTOR, "div:nth-child(8) > table td.carResultRow_OfferInfo-toolbar > a")
+
+
 class CalendarWidgetLocators:
     CHOOSE_MONTH_BUTTON_LOCATOR_PATTERN = "//div[text()=' {month} ']"  # Jan
     CHOOSE_DAY_OF_MONTH_LOCATOR_PATTERN = "[data-id='{date}']"  # date yyyy-mm-dd
