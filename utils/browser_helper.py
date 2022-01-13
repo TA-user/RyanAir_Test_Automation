@@ -57,3 +57,30 @@ class ElementInteractions:
             logger.error(f'Cannot clear field, located "{selector}"...')
             raise
         logger.debug(f'Field, located "{selector}" cleared...')
+
+    def find_element(self, selector):
+        try:
+            element = WebDriverWait(self.browser, wait_time_s).until(EC.presence_of_element_located(selector))
+        except WebDriverException:
+            logger.error(f'Cannot find element "{selector}" in DOM!')
+            raise
+        logger.debug(f'Element "{selector}" was found in DOM ...')
+        return element
+
+    def is_element_visible(self, selector):
+        try:
+            self.find_visible_element(selector)
+        except WebDriverException:
+            logger.error(f'Element "{selector}" is not visible!')
+            return False
+        logger.debug(f'Element "{selector}" is visible')
+        return True
+
+    def is_element_clickable(self, selector):
+        try:
+            self.find_clickable_element(selector)
+        except WebDriverException:
+            logger.error(f'Element "{selector}" is not clickable')
+            return False
+        logger.debug(f'Element "{selector}" is clickable')
+        return True
