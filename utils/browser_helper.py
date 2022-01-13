@@ -3,9 +3,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.support import expected_conditions as EC
 from utils.logging import Logger
-
-# MOVE THIS VARIABLE TO CONFIG.PY FILE
-wait_time_s = 5
+from config import wait_time_s
 
 
 class ElementInteractions:

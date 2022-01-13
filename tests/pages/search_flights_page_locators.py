@@ -45,4 +45,3 @@ class TripPlannerLocators:
     RETURN_DATE = (By.CSS_SELECTOR, "span[data-ref='details-header-end-date']")
     DEPART_FLIGHT_LOCATIONS = (By.CSS_SELECTOR, "div.pillar-tab-details__extra-info-title:first-of-type")
     RETURN_FLIGHT_LOCATIONS = (By.CSS_SELECTOR, "div.pillar-tab-details__extra-info-title:nth-of-type(3)")
-
