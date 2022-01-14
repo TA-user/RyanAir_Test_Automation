@@ -1,11 +1,18 @@
 from .base_page import BasePage
-from .main_page_locators import MainPageLocators, SearchCarsTabLocators, CalendarWidgetLocators
+from .main_page_locators import MainPageLocators, SearchCarsTabLocators, CalendarWidgetLocators, MainPageHeaderLocators, \
+    LogInPopupLocators
 from utils.text_formatter import TextFormatter
 
 
 class MainPage(BasePage):
-    def click_accept_cookie_popup_button(self):
+    def accept_cookies(self):
         self.element_interactions.click_element(MainPageLocators.ACCEPT_COOKIES_BUTTON)
+
+    def log_in(self, user, password):
+        self.element_interactions.click_element(MainPageHeaderLocators.LOG_IN_BUTTON)
+        self.element_interactions.send_text_in_field(LogInPopupLocators.EMAIL_FIELD, user)
+        self.element_interactions.send_text_in_field(LogInPopupLocators.PASSWORD_FIELD, password)
+        self.element_interactions.click_element(LogInPopupLocators.CONFIRMATION_LOG_IN_BUTTON)
 
     def open_search_cars_tab(self):
         self.element_interactions.click_element(MainPageLocators.SEARCH_CARS_TAB)
@@ -22,7 +29,6 @@ class MainPageSearchHotelsTab(BasePage):
 class MainPageCarHireTab(BasePage):
     def perform_car_sharing(self, pick_up_location: str, pick_up_year_month_day: str, pick_up_time: str,
                             drop_off_year_month_day: str, drop_off_time: str):
-
         self.choose_pick_up_location(pick_up_location)
         self.choose_pick_up_date(pick_up_year_month_day)
         self.choose_drop_off_date(drop_off_year_month_day)

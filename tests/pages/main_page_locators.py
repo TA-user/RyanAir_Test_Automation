@@ -3,8 +3,8 @@ from selenium.webdriver.common.by import By
 
 class LogInPopupLocators:
     CONFIRMATION_LOG_IN_BUTTON = (By.XPATH, "//form[@data-ref='login_modal']//button[@type='submit']")
-    EMAIL_FORM = (By.XPATH, "//input[@placeholder='email@email.com']")
-    PASSWORD_FORM = (By.XPATH, "//input[@placeholder='Password']")
+    EMAIL_FIELD = (By.XPATH, "//input[@placeholder='email@email.com']")
+    PASSWORD_FIELD = (By.XPATH, "//input[@placeholder='Password']")
 
 
 class MainPageLocators:
@@ -21,6 +21,7 @@ class MainPageHeaderLocators:
     LOG_IN_BUTTON = (By.XPATH, "//button[@aria-label='Log in']")
     LOG_OUT_BUTTON = (By.XPATH, "//a[@data-ref='header-dropdown-user__logout']")
     USER_MENU = (By.XPATH, "//button[@data-ref='header-menu-item__toggle-button']/hp-header-menu-user")
+    USER_AVATAR = (By.CSS_SELECTOR, "span.ry-header__user-avatar-container")
 
 
 class SearchCarsTabLocators:
