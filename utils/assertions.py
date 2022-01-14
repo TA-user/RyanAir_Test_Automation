@@ -26,6 +26,11 @@ class Assertions(ElementInteractions):
         required_element = self.find_element(locator)
         assert_that(required_element.text, description="Element don't contain required phrase").contains(phrase)
 
+    @allure.step('Verification that text of visible element "{1}" contain phrase - "{2}"')
+    def visible_element_should_contain_phrase(self, locator, phrase):
+        required_element = self.find_visible_element(locator)
+        assert_that(required_element.text, description="Visible element don't contain required phrase").contains(phrase)
+
     @allure.step('Verification that text of element "{1}" is in phrase "{1}"')
     def element_text_should_be_in_phrase(self, locator, phrase):
         required_element = self.find_element(locator)

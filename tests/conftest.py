@@ -9,6 +9,7 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from config import Urls, DefaultCreds
 from tests.pages.main_page import MainPage, MainPageCarHireTab, MainPageSearchHotelsTab, MainPageSearchFlightsTab
 from utils.assertions import Assertions
+from tests.pages.trip_viewer_page import TripViewerPageFlightsTab, TripViewerPageSeatsTab, TripViewerPageBagsTab, TripViewerPageExtrasTab
 
 
 def pytest_addoption(parser):
@@ -105,3 +106,19 @@ def password(request):
     if password_cmd == "None":
         password_cmd = DefaultCreds.PASSWORD
     return password_cmd
+
+@pytest.fixture(scope="module")
+def trip_viewer_page_flights_tab(browser):
+    return TripViewerPageFlightsTab(browser=browser, url=browser.current_url)
+
+@pytest.fixture(scope="module")
+def trip_viewer_page_seats_tab(browser):
+    return TripViewerPageSeatsTab(browser=browser, url=browser.current_url)
+
+@pytest.fixture(scope="module")
+def trip_viewer_page_bags_tab(browser):
+    return TripViewerPageBagsTab(browser=browser, url=browser.current_url)
+
+@pytest.fixture(scope="module")
+def trip_viewer_page_extras_tab(browser):
+    return TripViewerPageExtrasTab(browser=browser, url=browser.current_url)
