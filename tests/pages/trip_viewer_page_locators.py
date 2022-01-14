@@ -4,7 +4,10 @@ from selenium.webdriver.common.by import By
 class FlightsTabLocators:
     FLIGHT_CARDS = (By.XPATH, "//flight-card")
     FLIGHT_HEADER_SUMMARY = (By.XPATH, "//flights-trip-details/div")
-    FLIGHTS_PRICES = (By.CSS_SELECTOR, "span[data-e2e='flight-card-price']")
+    ACTUAL_DEPART_LOCATION = (By.XPATH, "(//flights-trip-details/div//h4)[1]")
+    ACTUAL_DESTINATION_LOCATION = (By.XPATH, "(//flights-trip-details/div//h4)[last()]")
+    FLIGHT_DEPART_PRICES = (By.CSS_SELECTOR, "journey-container[data-ref='outbound'] span[data-e2e='flight-card-price']")
+    FLIGHT_RETURN_PRICES = (By.CSS_SELECTOR, "journey-container[data-ref='inbound'] span[data-e2e='flight-card-price']")
     LIGHT_TYPE_CONTINUE_BUTTON = (By.CSS_SELECTOR, "div.fare-card--primary button.fare-card__button")
     CONFIRMATION_VALUE_FARE = (By.CSS_SELECTOR, "button[data-e2e='value']")
     PASSENGER_TITLE = (By.CSS_SELECTOR, "button[type='button']")
@@ -13,8 +16,7 @@ class FlightsTabLocators:
     LAST_NAME_PASSENGER_INPUT = (By.CSS_SELECTOR, "input[name='form.passengers.ADT-0.surname']")
     PASSENGERS_CONTINUATION_BUTTON = (By.CSS_SELECTOR, "button.continue-flow__button")
 
-
-class FlightsPageHeaderLocators:
+class HeaderLocators:
     BASKET_ICON = (By.CSS_SELECTOR, "div.basket-total")
     USER_MENU_DROPDOWN = (By.XPATH, "//logged-in")
     LOG_OUT_BUTTON = (By.XPATH, "//ry-log-out-button//button")
@@ -31,7 +33,7 @@ class BagsTabLocators:
 
 class ExtrasTabLocators:
     EXTRAS_TRIP_CONTINUATION_BUTTON = (By.CSS_SELECTOR, "airport-and-flight-container + button")
-    EXTRAS_TRANSPORT_CONTINUATION_BUTTON = (By.CSS_SELECTOR, "airport-and-flight-container + button")
+    EXTRAS_TRANSPORT_CONTINUATION_BUTTON = (By.XPATH, "//button[contains(text(), 'Continue')]")
 
 
 class SeatsTabLocators:

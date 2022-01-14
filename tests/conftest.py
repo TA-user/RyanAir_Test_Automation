@@ -8,6 +8,7 @@ from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from config import MAIN_PAGE_URL
 from tests.pages.main_page import MainPage, MainPageCarHireTab, MainPageSearchHotelsTab, MainPageSearchFlightsTab
+from tests.pages.trip_viewer_page import TripViewerPageFlightsTab, TripViewerPageSeatsTab, TripViewerPageBagsTab, TripViewerPageExtrasTab
 
 
 def pytest_addoption(parser):
@@ -73,3 +74,19 @@ def main_page_car_hire_tab(browser):
 @pytest.fixture(scope="module")
 def main_page_search_hotels_tab(browser):
     return MainPageSearchHotelsTab(browser=browser, url=browser.current_url)
+
+@pytest.fixture(scope="module")
+def trip_viewer_page_flights_tab(browser):
+    return TripViewerPageFlightsTab(browser=browser, url=browser.current_url)
+
+@pytest.fixture(scope="module")
+def trip_viewer_page_seats_tab(browser):
+    return TripViewerPageSeatsTab(browser=browser, url=browser.current_url)
+
+@pytest.fixture(scope="module")
+def trip_viewer_page_bags_tab(browser):
+    return TripViewerPageBagsTab(browser=browser, url=browser.current_url)
+
+@pytest.fixture(scope="module")
+def trip_viewer_page_extras_tab(browser):
+    return TripViewerPageExtrasTab(browser=browser, url=browser.current_url)

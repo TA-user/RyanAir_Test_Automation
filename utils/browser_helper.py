@@ -1,4 +1,5 @@
 from loguru import logger
+from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.support import expected_conditions as EC
@@ -84,3 +85,32 @@ class ElementInteractions:
             return False
         logger.debug(f'Element "{selector}" is clickable')
         return True
+
+    def find_visible_elements(self, selector):
+        try:
+            elements = WebDriverWait(self.browser, wait_time_s).until(EC.visibility_of_all_elements_located(selector))
+        except WebDriverException:
+            logger.error(f'Not all elements "{selector}" are visible')
+            raise
+        logger.debug(f'Visible elements "{selector}" was found')
+        return elements
+    
+    def choose_element_with_minimum_price(self, selector):
+        elements = self.find_visible_elements(selector)
+        elements_values = []
+        for element in elements:
+            value = float(element.text[1:])
+            elements_values.append(value)
+        element_dict = ({element:value for element in elements for value in elements_values})
+        minimum_element = min(element_dict, key=element_dict.get)
+        return minimum_element
+    
+    def click_at_coordinates_of_element(self, selector, x_coord, y_coord):
+        try:
+            element = self.find_visible_element(selector)
+            webdriver.ActionChains(self.browser).move_to_element_with_offset(element, x_coord, y_coord).click().perform()
+        except WebDriverException:
+            logger.error(f'Cannot click at x - "{x_coord}" and y - "{y_coord}" coordinates element "{selector}"')
+            raise
+        logger.debug(f'Element "{selector}" clicked at x - "{x_coord}" and y - "{y_coord}" coordinates')
+    
