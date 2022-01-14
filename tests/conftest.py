@@ -6,13 +6,24 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
-from config import MAIN_PAGE_URL
+from config import Urls, DefaultCreds
 from tests.pages.main_page import MainPage, MainPageCarHireTab, MainPageSearchHotelsTab, MainPageSearchFlightsTab
+from utils.assertions import Assertions
 
 
 def pytest_addoption(parser):
     parser.addoption("--browser_name", action="store", default="chrome",
                      help="Choose browser: chrome or firefox or edge")
+    parser.addoption('--user',
+                     action='store',
+                     default='None',
+                     help="Set a username",
+                     )
+    parser.addoption('--password',
+                     action='store',
+                     default='None',
+                     help="Set a password",
+                     )
 
 
 @pytest.fixture(scope="package")
@@ -57,7 +68,7 @@ def pytest_runtest_makereport(item, call):
 
 @pytest.fixture(scope="module")
 def main_page(browser):
-    return MainPage(browser=browser, url=MAIN_PAGE_URL)
+    return MainPage(browser=browser, url=Urls.MAIN_PAGE_URL)
 
 
 @pytest.fixture(scope="module")
@@ -73,3 +84,24 @@ def main_page_car_hire_tab(browser):
 @pytest.fixture(scope="module")
 def main_page_search_hotels_tab(browser):
     return MainPageSearchHotelsTab(browser=browser, url=browser.current_url)
+
+
+@pytest.fixture(scope="module")
+def assertions(browser):
+    return Assertions(browser=browser)
+
+
+@pytest.fixture()
+def user(request):
+    user_cmd = request.config.getoption("user")
+    if user_cmd == "None":
+        user_cmd = DefaultCreds.USERNAME
+    return user_cmd
+
+
+@pytest.fixture()
+def password(request):
+    password_cmd = request.config.getoption("password")
+    if password_cmd == "None":
+        password_cmd = DefaultCreds.PASSWORD
+    return password_cmd

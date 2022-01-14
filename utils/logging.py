@@ -14,11 +14,10 @@ class Logger:
         logger.remove()
         return logger.add("logs/debug.log",
                           format="{time:DD:MM:YYYY:h:m:s} {level} {message}",
-                          rotation="10 KB",
-                          retention="2 days",
+                          mode="w",
                           filter=self.debug_only), \
                logger.add("logs/errors.log",
                           format="{time:DD:MM:YYYY:h:m:s} {level} {message}",
-                          rotation="10 KB",
-                          retention="2 days",
+                          mode="w",
                           filter=self.error_only)
+

@@ -1,12 +1,14 @@
 from loguru import logger
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.support import expected_conditions as EC
 from utils.logging import Logger
-from config import wait_time_s
+from config import BrowserHelperSettings
 
 
 class ElementInteractions:
+    WAIT_TIME_SECS = BrowserHelperSettings.WAIT_TIME_SECS
     Logger.set_logger(Logger())
 
     def __init__(self, browser):
@@ -14,20 +16,49 @@ class ElementInteractions:
 
     def find_visible_element(self, selector):
         try:
-            element = WebDriverWait(self.browser, wait_time_s).until(EC.visibility_of_element_located(selector))
+            element = WebDriverWait(self.browser, self.WAIT_TIME_SECS).until(EC.visibility_of_element_located(selector))
         except WebDriverException:
             logger.error(f'Cannot find visible element "{selector}"!')
             raise
         logger.debug(f'Element "{selector}" was found...')
         return element
 
+    def find_visible_elements(self, selector):
+        try:
+            elements = WebDriverWait(self.browser, self.WAIT_TIME_SECS).until(EC.visibility_of_all_elements_located(selector))
+        except WebDriverException:
+            logger.error(f'Not all elements "{selector}" are visible')
+            raise
+        logger.debug(f'Visible elements "{selector}" was found')
+        return elements
+
     def find_clickable_element(self, selector):
         try:
-            element = WebDriverWait(self.browser, wait_time_s).until(EC.element_to_be_clickable(selector))
+            element = WebDriverWait(self.browser, self.WAIT_TIME_SECS).until(EC.element_to_be_clickable(selector))
         except WebDriverException:
             logger.error(f'Cannot find clickable element "{selector}"!')
             raise
         logger.debug(f'Element "{selector}" was found...')
+        return element
+
+    def find_element_by_text(self, text):
+        locator = (By.XPATH, f"//*[text()='{text}']")
+        try:
+            element = WebDriverWait(self.browser, self.WAIT_TIME_SECS).until(EC.presence_of_element_located(locator))
+        except WebDriverException:
+            logger.error(f'Cannot find element "{locator}" in DOM!')
+            raise
+        logger.debug(f'Element "{locator}" was found in DOM ...')
+        return element
+
+    def find_element_by_partial_text_match(self, text):
+        locator = (By.XPATH, f"//*[contains(text(),'{text}')]")
+        try:
+            element = WebDriverWait(self.browser, self.WAIT_TIME_SECS).until(EC.presence_of_element_located(locator))
+        except WebDriverException:
+            logger.error(f'Cannot find element "{locator}" in DOM!')
+            raise
+        logger.debug(f'Element "{locator}" was found in DOM ...')
         return element
 
     def click_element(self, selector):
@@ -52,6 +83,7 @@ class ElementInteractions:
     def clear_field(self, selector):
         element = self.find_clickable_element(selector)
         try:
+            element.click()
             element.clear()
         except WebDriverException:
             logger.error(f'Cannot clear field, located "{selector}"...')
@@ -60,7 +92,7 @@ class ElementInteractions:
 
     def find_element(self, selector):
         try:
-            element = WebDriverWait(self.browser, wait_time_s).until(EC.presence_of_element_located(selector))
+            element = WebDriverWait(self.browser, self.WAIT_TIME_SECS).until(EC.presence_of_element_located(selector))
         except WebDriverException:
             logger.error(f'Cannot find element "{selector}" in DOM!')
             raise

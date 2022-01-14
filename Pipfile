@@ -4,17 +4,15 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-
 allure-pytest = "*"
 assertpy = "*"
 msedge-selenium-tools = "*"
 pytest = "*"
 selenium = "*"
 webdriver-manager = "*"
-
+loguru = "*"
 
 [dev-packages]
 
 [requires]
-
 python_version = "3.10"

@@ -1,8 +1,6 @@
 import allure
 from assertpy import assert_that
-
 from utils.browser_helper import ElementInteractions
-from utils.logging import Logger
 
 
 class Assertions(ElementInteractions):
@@ -12,8 +10,6 @@ class Assertions(ElementInteractions):
     assertions.element_should_be_clickable(MainPageLocators.ADD_ITEM)
     assertions.element_should_contain_text(MainPageHeaderLocators.USER_MENU, 'user')
     """
-
-    Logger.set_logger(Logger())
 
     @allure.step('Verification of visibility "{1}" element')
     def element_should_be_visible(self, locator):
