@@ -1,6 +1,4 @@
 from loguru import logger
-import os
-import shutil
 
 
 class Logger:
@@ -20,7 +18,6 @@ class Logger:
                           filter=self.debug_only), \
                logger.add("logs/errors.log",
                           format="{time:DD:MM:YYYY:h:m:s} {level} {message}",
-                          enqueue=True,
                           mode="w",
                           filter=self.error_only)
 

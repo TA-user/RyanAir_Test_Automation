@@ -6,7 +6,7 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
-from config import Urls
+from config import Urls, DefaultCreds
 from tests.pages.main_page import MainPage, MainPageCarHireTab, MainPageSearchHotelsTab, MainPageSearchFlightsTab
 from utils.assertions import Assertions
 
@@ -18,13 +18,11 @@ def pytest_addoption(parser):
                      action='store',
                      default='None',
                      help="Set a username",
-                     required=True
                      )
     parser.addoption('--password',
                      action='store',
                      default='None',
                      help="Set a password",
-                     required=True
                      )
 
 
@@ -96,10 +94,14 @@ def assertions(browser):
 @pytest.fixture()
 def user(request):
     user_cmd = request.config.getoption("user")
+    if user_cmd == "None":
+        user_cmd = DefaultCreds.USERNAME
     return user_cmd
 
 
 @pytest.fixture()
 def password(request):
     password_cmd = request.config.getoption("password")
+    if password_cmd == "None":
+        password_cmd = DefaultCreds.PASSWORD
     return password_cmd
