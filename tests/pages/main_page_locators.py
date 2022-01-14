@@ -35,9 +35,10 @@ class SearchCarsTabLocators:
 
 
 class SearchFlightsTabLocators:
-    INPUT_DEPARTURE_FORM = (By.XPATH, "//*[@id='input-button__departure']")
-    INPUT_DESTINATION_FORM = (By.XPATH, "//input[@id='input-button__destination']")
+    DEPART_LOCATION = (By.XPATH, "//*[@id='input-button__departure']")
+    DESTINATION_LOCATION = (By.XPATH, "//input[@id='input-button__destination']")
     LAST_ITEM_DROPDOWN_AIRPORT = (By.XPATH, "(//span[@data-ref='airport-item__name'])[last()]")
+    DEPART_FORM = (By.CSS_SELECTOR, "fsw-input-button[uniqueid='dates-from'] div.input-button__input")
     RETURN_FORM = (By.XPATH, "//fsw-input-button[@uniqueid='dates-to']")
     SEARCH_FLIGHT_BUTTON = (By.XPATH, "//button[@data-ref='flight-search-widget__cta']")
 
