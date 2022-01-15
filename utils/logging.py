@@ -20,4 +20,3 @@ class Logger:
                           format="{time:DD:MM:YYYY:h:m:s} {level} {message}",
                           mode="w",
                           filter=self.error_only)
-

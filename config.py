@@ -1,5 +1,5 @@
 class BrowserHelperSettings:
-    WAIT_TIME_SECS = 5
+    WAIT_TIME_SECS = 10
 
 
 class Urls:

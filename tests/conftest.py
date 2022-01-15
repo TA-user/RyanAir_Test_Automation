@@ -10,7 +10,7 @@ from config import DefaultCreds
 from tests.pages.main_page import MainPage, MainPageCarHireTab, MainPageSearchHotelsTab, MainPageSearchFlightsTab
 from utils.assertions import Assertions
 from tests.pages.trip_viewer_page import TripViewerPageFlightsTab, TripViewerPageSeatsTab, TripViewerPageBagsTab, \
-    TripViewerPageExtrasTab, TripViewerPage
+    TripViewerPageExtrasTab, TripViewerPage, TripViewerPageCarHireTab, TripViewerPageOverviewTab, TripViewerPageHeader
 from tests.pages.payment_page import PaymentPage
 
 
@@ -138,3 +138,18 @@ def trip_viewer_page(browser):
 @pytest.fixture(scope="module")
 def payment_page(browser):
     return PaymentPage(browser=browser)
+
+
+@pytest.fixture(scope="module")
+def trip_viewer_page_car_hire_tab(browser):
+    return TripViewerPageCarHireTab(browser=browser)
+
+
+@pytest.fixture(scope="module")
+def trip_viewer_page_overview_tab(browser):
+    return TripViewerPageOverviewTab(browser=browser)
+
+
+@pytest.fixture(scope="module")
+def trip_viewer_page_header(browser):
+    return TripViewerPageHeader(browser=browser)

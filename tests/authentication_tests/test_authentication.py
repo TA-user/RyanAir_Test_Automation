@@ -17,4 +17,3 @@ def setup(browser, main_page, username, password):
 def test_guest_can_log_in(setup, username, assertions):
     assertions.element_should_be_visible(MainPageHeaderLocators.USER_AVATAR)
     assertions.element_should_contain_value(MainPageHeaderLocators.USER_MENU, username)
-    
