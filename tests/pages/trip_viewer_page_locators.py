@@ -20,7 +20,7 @@ class HeaderLocators:
     BASKET_ICON = (By.CSS_SELECTOR, "div.basket-total")
     USER_MENU_DROPDOWN = (By.XPATH, "//logged-in")
     LOG_OUT_BUTTON = (By.XPATH, "//ry-log-out-button//button")
-    MAIN_LOGO = (By.XPATH, "//icon[@class='ry-header__logo']")
+    MAIN_LOGO = (By.CSS_SELECTOR, "icon.ry-header__logo span svg")
     FLIGHT_CONFIRMATION_POPUP = (By.CSS_SELECTOR, "trip-basket-tooltip")
     CLOSE_CONFIRMATION_POPUP_BUTTON = (By.CSS_SELECTOR, "icon[data-ref='tooltip-close-icon']")
     BASKET_TOTAL_PRICE = (By.CSS_SELECTOR, "span.basket-total-price")
@@ -32,8 +32,19 @@ class HeaderLocators:
     BASKET_POPUP_CAR_HIRE_PRICE = (By.CSS_SELECTOR, "h4>*>.price__integers")
     BASKET_CHECKOUT_BUTTON = (By.CSS_SELECTOR, "[data-ref=basket-continue-flow__check-out]")
 
-    BASKET_FIRST_FLIGHT_CARD = (By.CSS_SELECTOR, "div.price-breakdown-pillars__group[data-ref='outbound']")
-    BASKET_FIRST_SECOND_CARD = (By.CSS_SELECTOR, "div.price-breakdown-pillars__group[data-ref='inbound']")
+    BASKET_DEPART_LOCATION_FIRST_FLIGHT = (By.CSS_SELECTOR,
+        "div[data-ref='outbound'] ry-flights-group-info div.flight-details span:nth-child(1)")
+    BASKET_DESTINATION_LOCATION_FIRST_FLIGHT = (By.CSS_SELECTOR,
+        "div[data-ref='outbound'] ry-flights-group-info div.flight-details span:nth-child(3)")
+    BASKET_DEPART_LOCATION_SECOND_FLIGHT = (By.CSS_SELECTOR,
+        "div[data-ref='inbound'] ry-flights-group-info div.flight-details span:nth-child(1)")
+    BASKET_DESTINATION_LOCATION_SECOND_FLIGHT = (By.CSS_SELECTOR,
+        "div[data-ref='inbound'] ry-flights-group-info div.flight-details span:nth-child(3)")
+    BASKET_FIRST_FLIGHT_DATE = (By.CSS_SELECTOR,
+        "div[data-ref='outbound'] ry-flights-group-info div.flight-segment-details span:nth-child(1)")
+    BASKET_SECOND_FLIGHT_DATE = (By.CSS_SELECTOR,
+        "div[data-ref='inbound'] ry-flights-group-info div.flight-segment-details span:nth-child(1)")
+    
 
 class BagsTabLocators:
     ONE_SMALL_BAG_RADIOBUTTON = (By.CSS_SELECTOR, "bags-small-bag-pax-control ry-radio-circle-button")
@@ -43,7 +54,8 @@ class BagsTabLocators:
 
 class ExtrasTabLocators:
     EXTRAS_TRIP_CONTINUATION_BUTTON = (By.CSS_SELECTOR, "airport-and-flight-container + button")
-    EXTRAS_TRANSPORT_CONTINUATION_BUTTON = (By.XPATH, "//button[contains(text(), 'Continue')]")
+    EXTRAS_TRANSPORT_CONTINUATION_BUTTON = (By.CSS_SELECTOR, "parking-container + div + button.app-container__cta.ry-button--gradient-yellow.ry-button--large")
+    DECLINE_POPUP_EXTRAS_BUTTON = (By.CSS_SELECTOR, "button.enhanced-takeover__product-dismiss-cta")
 
 
 class SeatsTabLocators:

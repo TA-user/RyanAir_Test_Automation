@@ -8,8 +8,7 @@ class MainPage(BasePage):
     def accept_cookies(self):
         if self.element_interactions.is_element_visible(MainPageLocators.ACCEPT_COOKIES_BUTTON):
             self.element_interactions.click_element(MainPageLocators.ACCEPT_COOKIES_BUTTON)
-        else:
-            pass
+
 
     def log_in(self, user, password):
         self.element_interactions.click_element(MainPageHeaderLocators.LOG_IN_BUTTON)

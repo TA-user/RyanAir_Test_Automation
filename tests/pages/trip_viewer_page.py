@@ -17,8 +17,7 @@ class TripViewerPage(BasePage):
     def close_popup(self):
         if self.element_interactions.is_element_visible(HeaderLocators.FLIGHT_CONFIRMATION_POPUP):
             self.element_interactions.click_element(HeaderLocators.CLOSE_CONFIRMATION_POPUP_BUTTON)
-        else:
-            pass
+
 
     def go_to_main(self):
         self.element_interactions.click_element(HeaderLocators.MAIN_LOGO)
@@ -60,8 +59,8 @@ class TripViewerPageBagsTab(BasePage):
 class TripViewerPageExtrasTab(BasePage):
     def continue_order_without_extras(self):
         self.element_interactions.click_element(ExtrasTabLocators.EXTRAS_TRIP_CONTINUATION_BUTTON)
-        self.element_interactions.click_at_coordinates_of_element(ExtrasTabLocators.EXTRAS_TRANSPORT_CONTINUATION_BUTTON, 10, 10)
-
+        self.element_interactions.click_at_coordinates_of_element(
+            ExtrasTabLocators.EXTRAS_TRANSPORT_CONTINUATION_BUTTON, 10, 10)
 
 class TripViewerPageOverviewTab(BasePage):
     flight_search_date_format = "%a, %d %b"

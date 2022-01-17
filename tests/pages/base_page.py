@@ -7,7 +7,6 @@ class BasePage:
         self.browser = browser
         self.url = url
         self.element_interactions = ElementInteractions(self.browser)
-        self.assertions = Assertions(self.browser)
 
     def open(self):
         self.browser.get(self.url)

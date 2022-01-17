@@ -117,7 +117,6 @@ class ElementInteractions:
             return False
         logger.debug(f'Element "{selector}" is clickable')
         return True
-
     
     def choose_element_with_minimum_price(self, selector):
         elements = self.find_visible_elements(selector)
@@ -131,7 +130,7 @@ class ElementInteractions:
     
     def click_at_coordinates_of_element(self, selector, x_coord, y_coord):
         try:
-            element = self.find_visible_element(selector)
+            element = self.find_clickable_element(selector)
             webdriver.ActionChains(self.browser).move_to_element_with_offset(element, x_coord, y_coord).click().perform()
         except WebDriverException:
             logger.error(f'Cannot click at x - "{x_coord}" and y - "{y_coord}" coordinates element "{selector}"')

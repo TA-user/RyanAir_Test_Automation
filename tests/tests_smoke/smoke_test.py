@@ -1,5 +1,6 @@
 import time
 import pytest
+from assertpy import soft_assertions
 from tests.pages.main_page_locators import MainPageHeaderLocators
 from tests.pages.main_page_locators import LogInPopupLocators
 from tests.pages.main_page_locators import MainPageHeaderLocators
@@ -28,11 +29,10 @@ def test_guest_can_log_in(setup, user, assertions):
 
 @pytest.mark.parametrize("depart_airport, destination_airport, depart_date, return_date",
                          [("Berlin Brandenburg", "London Stansted", "2022-03-11", "2022-03-18")])
-def test_user_can_order_flights(browser, setup, main_page, main_page_search_flights_tab, trip_viewer_page_flights_tab,
+def test_user_can_order_flights(browser, assertions, setup, main_page, main_page_search_flights_tab, trip_viewer_page_flights_tab,
                                 trip_viewer_page_seats_tab, trip_viewer_page_bags_tab, trip_viewer_page_extras_tab,
                                 trip_viewer_page, depart_airport, destination_airport, depart_date,
                                 return_date):
-    assertions = Assertions(browser)
     main_page_search_flights_tab.perform_flights_search(depart_airport, destination_airport, depart_date, return_date)
     assertions.element_should_be_visible(FlightsTabLocators.FLIGHT_CARDS)
     assertions.visible_element_should_contain_phrase(FlightsTabLocators.ACTUAL_DEPART_LOCATION, depart_airport)
@@ -57,11 +57,12 @@ def test_user_can_order_flights(browser, setup, main_page, main_page_search_flig
     assertions.element_text_should_be_in_date(TripPlannerLocators.RETURN_DATE, return_date)
     assertions.element_should_be_clickable(OverviewTabLocators.CHECKOUT_BUTTON)
     trip_viewer_page.open_cart()
-    assertions.element_should_contain_phrase(HeaderLocators.BASKET_FIRST_FLIGHT_CARD, depart_airport)
-    assertions.element_should_contain_phrase(HeaderLocators.BASKET_FIRST_FLIGHT_CARD, destination_airport)
-    assertions.element_should_contain_phrase(HeaderLocators.BASKET_FIRST_FLIGHT_CARD, destination_airport)
-    assertions.element_should_contain_phrase(HeaderLocators.BASKET_FIRST_SECOND_CARD, depart_airport)
-    assertions.element_should_contain_phrase(HeaderLocators.BASKET_FIRST_SECOND_CARD, destination_airport)
-    assertions.element_should_contain_date(HeaderLocators.BASKET_FIRST_FLIGHT_CARD, depart_airport)
-    assertions.element_should_contain_date(HeaderLocators.BASKET_FIRST_FLIGHT_CARD, return_date)
+    assertions.element_should_contain_date(HeaderLocators.BASKET_FIRST_FLIGHT_DATE, depart_date)
+    assertions.element_should_contain_date(HeaderLocators.BASKET_SECOND_FLIGHT_DATE, return_date)
+    assertions.visible_element_should_contain_phrase(HeaderLocators.BASKET_DEPART_LOCATION_FIRST_FLIGHT, depart_airport)
+    assertions.visible_element_should_contain_phrase(HeaderLocators.BASKET_DESTINATION_LOCATION_FIRST_FLIGHT, destination_airport)
+    assertions.visible_element_should_contain_phrase(HeaderLocators.BASKET_DEPART_LOCATION_SECOND_FLIGHT, destination_airport)
+    assertions.visible_element_should_contain_phrase(HeaderLocators.BASKET_DESTINATION_LOCATION_SECOND_FLIGHT, depart_airport)
     trip_viewer_page.go_to_main()
+    
+    
