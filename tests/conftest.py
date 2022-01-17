@@ -11,6 +11,7 @@ from tests.pages.main_page import MainPage, MainPageCarHireTab, MainPageSearchHo
 from utils.assertions import Assertions
 from tests.pages.trip_viewer_page import TripViewerPageFlightsTab, TripViewerPageSeatsTab, TripViewerPageBagsTab, \
     TripViewerPageExtrasTab, TripViewerPage
+from tests.pages.payment_page import PaymentPage
 
 
 def pytest_addoption(parser):
@@ -123,4 +124,8 @@ def trip_viewer_page_extras_tab(browser):
 @pytest.fixture(scope="module")
 def trip_viewer_page(browser):
     return TripViewerPage(browser=browser, url=browser.current_url)
+
+@pytest.fixture(scope="module")
+def payment_page(browser):
+    return PaymentPage(browser=browser, url=browser.current_url)
 

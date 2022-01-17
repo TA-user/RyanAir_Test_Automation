@@ -1,7 +1,4 @@
-import time
-
 from .base_page import BasePage
-from selenium import webdriver
 
 from tests.pages.trip_viewer_page_locators import FlightsTabLocators
 from tests.pages.trip_viewer_page_locators import SeatsTabLocators
@@ -9,6 +6,7 @@ from tests.pages.trip_viewer_page_locators import BagsTabLocators
 from tests.pages.trip_viewer_page_locators import ExtrasTabLocators
 from tests.pages.trip_viewer_page_locators import TripPlannerLocators
 from tests.pages.trip_viewer_page_locators import HeaderLocators
+from tests.pages.trip_viewer_page_locators import OverviewTabLocators
 
 class TripViewerPage(BasePage):
     def open_cart(self):
@@ -18,6 +16,8 @@ class TripViewerPage(BasePage):
         if self.element_interactions.is_element_visible(HeaderLocators.FLIGHT_CONFIRMATION_POPUP):
             self.element_interactions.click_element(HeaderLocators.CLOSE_CONFIRMATION_POPUP_BUTTON)
 
+    def go_checkout(self):
+        self.element_interactions.click_element(OverviewTabLocators.CHECKOUT_BUTTON)
 
     def go_to_main(self):
         self.element_interactions.click_element(HeaderLocators.MAIN_LOGO)
@@ -59,8 +59,9 @@ class TripViewerPageBagsTab(BasePage):
 class TripViewerPageExtrasTab(BasePage):
     def continue_order_without_extras(self):
         self.element_interactions.click_element(ExtrasTabLocators.EXTRAS_TRIP_CONTINUATION_BUTTON)
-        self.element_interactions.click_at_coordinates_of_element(
-            ExtrasTabLocators.EXTRAS_TRANSPORT_CONTINUATION_BUTTON, 10, 10)
+        if self.element_interactions.is_element_visible(ExtrasTabLocators.TRANSPORT_INFO_CARD):
+            self.element_interactions.click_at_coordinates_of_element(
+                ExtrasTabLocators.EXTRAS_TRANSPORT_CONTINUATION_BUTTON, 10, 10)
 
 class TripViewerPageOverviewTab(BasePage):
     flight_search_date_format = "%a, %d %b"

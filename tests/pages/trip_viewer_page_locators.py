@@ -6,6 +6,7 @@ class FlightsTabLocators:
     FLIGHT_HEADER_SUMMARY = (By.XPATH, "//flights-trip-details/div")
     ACTUAL_DEPART_LOCATION = (By.XPATH, "(//flights-trip-details/div//h4)[1]")
     ACTUAL_DESTINATION_LOCATION = (By.XPATH, "(//flights-trip-details/div//h4)[last()]")
+    ACTUAL_DATES_DESCRIPTION = (By.CSS_SELECTOR, "div.details__bottom-bar")
     FLIGHT_DEPART_PRICES = (By.CSS_SELECTOR, "journey-container[data-ref='outbound'] span[data-e2e='flight-card-price']")
     FLIGHT_RETURN_PRICES = (By.CSS_SELECTOR, "journey-container[data-ref='inbound'] span[data-e2e='flight-card-price']")
     LIGHT_TYPE_CONTINUE_BUTTON = (By.CSS_SELECTOR, "div.fare-card--primary button.fare-card__button")
@@ -54,7 +55,9 @@ class BagsTabLocators:
 
 class ExtrasTabLocators:
     EXTRAS_TRIP_CONTINUATION_BUTTON = (By.CSS_SELECTOR, "airport-and-flight-container + button")
-    EXTRAS_TRANSPORT_CONTINUATION_BUTTON = (By.CSS_SELECTOR, "parking-container + div + button.app-container__cta.ry-button--gradient-yellow.ry-button--large")
+    EXTRAS_TRANSPORT_CONTINUATION_BUTTON = (By.CSS_SELECTOR,
+        "parking-container + div + button.app-container__cta.ry-button--gradient-yellow.ry-button--large")
+    TRANSPORT_INFO_CARD = (By.CSS_SELECTOR, "transfer-card transport-info-card")
     DECLINE_POPUP_EXTRAS_BUTTON = (By.CSS_SELECTOR, "button.enhanced-takeover__product-dismiss-cta")
 
 
@@ -74,4 +77,5 @@ class TripPlannerLocators:
 
 class OverviewTabLocators:
     CHECKOUT_BUTTON = (By.CSS_SELECTOR, "button[data-ref='trip-overview-container-checkout-button']")
+    
 
