@@ -21,9 +21,19 @@ class HeaderLocators:
     USER_MENU_DROPDOWN = (By.XPATH, "//logged-in")
     LOG_OUT_BUTTON = (By.XPATH, "//ry-log-out-button//button")
     MAIN_LOGO = (By.XPATH, "//icon[@class='ry-header__logo']")
-    FLIGHT_CONFIRMATION_POPUP = (By.CSS_SELECTOR, "ry-tooltip-1")
+    FLIGHT_CONFIRMATION_POPUP = (By.CSS_SELECTOR, "trip-basket-tooltip")
     CLOSE_CONFIRMATION_POPUP_BUTTON = (By.CSS_SELECTOR, "icon[data-ref='tooltip-close-icon']")
+    BASKET_TOTAL_PRICE = (By.CSS_SELECTOR, "span.basket-total-price")
 
+    BASKET_POPUP_VIEW_DETAIL_BUTTON = (By.CSS_SELECTOR, ".exp-panel__title-tabindex-wrapper [role=button]")
+    BASKET_POPUP_CAR_HIRE_PICK_UP_LOCATION = (By.CSS_SELECTOR, "[data-ref$=location-pickUp]")
+    BASKET_CAR_PICK_UP_DATETIME = (By.CSS_SELECTOR, "[data-ref$='date-pickUp']")
+    BASKET_CAR_DROP_OFF_DATETIME = (By.CSS_SELECTOR, "[data-ref$='date-dropOff']")
+    BASKET_POPUP_CAR_HIRE_PRICE = (By.CSS_SELECTOR, "h4>*>.price__integers")
+    BASKET_CHECKOUT_BUTTON = (By.CSS_SELECTOR, "[data-ref=basket-continue-flow__check-out]")
+
+    BASKET_FIRST_FLIGHT_CARD = (By.CSS_SELECTOR, "div.price-breakdown-pillars__group[data-ref='outbound']")
+    BASKET_FIRST_SECOND_CARD = (By.CSS_SELECTOR, "div.price-breakdown-pillars__group[data-ref='inbound']")
 
 class BagsTabLocators:
     ONE_SMALL_BAG_RADIOBUTTON = (By.CSS_SELECTOR, "bags-small-bag-pax-control ry-radio-circle-button")
@@ -45,5 +55,11 @@ class TripPlannerLocators:
     TRIP_PLANER_SIDEBAR = (By.CSS_SELECTOR, "div.trip-planner-container__content")
     DEPART_DATE = (By.CSS_SELECTOR, "span[data-ref='details-header-start-date']")
     RETURN_DATE = (By.CSS_SELECTOR, "span[data-ref='details-header-end-date']")
-    DEPART_FLIGHT_LOCATIONS = (By.CSS_SELECTOR, "div.pillar-tab-details__extra-info-title:first-of-type")
-    RETURN_FLIGHT_LOCATIONS = (By.CSS_SELECTOR, "div.pillar-tab-details__extra-info-title:nth-of-type(3)")
+    DEPART_LOCATION_FIRST_FLIGHT = (By.CSS_SELECTOR, "span[data-ref='pillar-tab-details-getting-there-outbound-origin']")
+    DESTINATION_LOCATION_FIRST_FLIGHT = (By.CSS_SELECTOR, "span[data-ref='pillar-tab-details-getting-there-outbound-destination']")
+    DEPART_LOCATION_SECOND_FLIGHT = (By.CSS_SELECTOR, "span[data-ref='pillar-tab-details-getting-there-outbound-origin']")
+    DESTINATION_LOCATION_SECOND_FLIGHT = (By.CSS_SELECTOR, "span[data-ref='pillar-tab-details-getting-there-outbound-destination']")
+
+class OverviewTabLocators:
+    CHECKOUT_BUTTON = (By.CSS_SELECTOR, "button[data-ref='trip-overview-container-checkout-button']")
+

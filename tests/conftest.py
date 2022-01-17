@@ -9,7 +9,8 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from config import Urls, DefaultCreds
 from tests.pages.main_page import MainPage, MainPageCarHireTab, MainPageSearchHotelsTab, MainPageSearchFlightsTab
 from utils.assertions import Assertions
-from tests.pages.trip_viewer_page import TripViewerPageFlightsTab, TripViewerPageSeatsTab, TripViewerPageBagsTab, TripViewerPageExtrasTab
+from tests.pages.trip_viewer_page import TripViewerPageFlightsTab, TripViewerPageSeatsTab, TripViewerPageBagsTab, \
+    TripViewerPageExtrasTab, TripViewerPage
 
 
 def pytest_addoption(parser):
@@ -66,27 +67,6 @@ def pytest_runtest_makereport(item, call):
         except Exception as e:
             print('Fail to take screen-shot: {}'.format(e))
 
-
-@pytest.fixture(scope="module")
-def main_page(browser):
-    return MainPage(browser=browser, url=Urls.MAIN_PAGE_URL)
-
-
-@pytest.fixture(scope="module")
-def main_page_search_flights_tab(browser):
-    return MainPageSearchFlightsTab(browser=browser, url=browser.current_url)
-
-
-@pytest.fixture(scope="module")
-def main_page_car_hire_tab(browser):
-    return MainPageCarHireTab(browser=browser, url=browser.current_url)
-
-
-@pytest.fixture(scope="module")
-def main_page_search_hotels_tab(browser):
-    return MainPageSearchHotelsTab(browser=browser, url=browser.current_url)
-
-
 @pytest.fixture(scope="module")
 def assertions(browser):
     return Assertions(browser=browser)
@@ -107,6 +87,23 @@ def password(request):
         password_cmd = DefaultCreds.PASSWORD
     return password_cmd
 
+
+@pytest.fixture(scope="module")
+def main_page(browser):
+    return MainPage(browser=browser, url=Urls.MAIN_PAGE_URL)
+
+@pytest.fixture(scope="module")
+def main_page_search_flights_tab(browser):
+    return MainPageSearchFlightsTab(browser=browser, url=browser.current_url)
+
+@pytest.fixture(scope="module")
+def main_page_car_hire_tab(browser):
+    return MainPageCarHireTab(browser=browser, url=browser.current_url)
+
+@pytest.fixture(scope="module")
+def main_page_search_hotels_tab(browser):
+    return MainPageSearchHotelsTab(browser=browser, url=browser.current_url)
+
 @pytest.fixture(scope="module")
 def trip_viewer_page_flights_tab(browser):
     return TripViewerPageFlightsTab(browser=browser, url=browser.current_url)
@@ -122,3 +119,8 @@ def trip_viewer_page_bags_tab(browser):
 @pytest.fixture(scope="module")
 def trip_viewer_page_extras_tab(browser):
     return TripViewerPageExtrasTab(browser=browser, url=browser.current_url)
+
+@pytest.fixture(scope="module")
+def trip_viewer_page(browser):
+    return TripViewerPage(browser=browser, url=browser.current_url)
+

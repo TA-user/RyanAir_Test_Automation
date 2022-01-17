@@ -118,14 +118,6 @@ class ElementInteractions:
         logger.debug(f'Element "{selector}" is clickable')
         return True
 
-    def find_visible_elements(self, selector):
-        try:
-            elements = WebDriverWait(self.browser, wait_time_s).until(EC.visibility_of_all_elements_located(selector))
-        except WebDriverException:
-            logger.error(f'Not all elements "{selector}" are visible')
-            raise
-        logger.debug(f'Visible elements "{selector}" was found')
-        return elements
     
     def choose_element_with_minimum_price(self, selector):
         elements = self.find_visible_elements(selector)

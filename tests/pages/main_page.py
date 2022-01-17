@@ -5,14 +5,21 @@ from utils.text_formatter import TextFormatter
 
 
 class MainPage(BasePage):
-    def accept_cookie(self):
-        self.element_interactions.click_element(MainPageLocators.ACCEPT_COOKIES_BUTTON)
+    def accept_cookies(self):
+        if self.element_interactions.is_element_visible(MainPageLocators.ACCEPT_COOKIES_BUTTON):
+            self.element_interactions.click_element(MainPageLocators.ACCEPT_COOKIES_BUTTON)
+        else:
+            pass
 
     def log_in(self, user, password):
         self.element_interactions.click_element(MainPageHeaderLocators.LOG_IN_BUTTON)
         self.element_interactions.send_text_in_field(LogInPopupLocators.EMAIL_FIELD, user)
         self.element_interactions.send_text_in_field(LogInPopupLocators.PASSWORD_FIELD, password)
         self.element_interactions.click_element(LogInPopupLocators.CONFIRMATION_LOG_IN_BUTTON)
+
+    def log_out(self):
+        self.element_interactions.click_element(MainPageHeaderLocators.USER_MENU)
+        self.element_interactions.click_element(MainPageHeaderLocators.LOG_OUT_BUTTON)
 
     def open_search_cars_tab(self):
         self.element_interactions.click_element(MainPageLocators.SEARCH_CARS_TAB)
