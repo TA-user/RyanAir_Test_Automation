@@ -1,5 +1,6 @@
 from loguru import logger
 from selenium.webdriver.common.by import By
+from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.support import expected_conditions as EC
@@ -116,3 +117,13 @@ class ElementInteractions:
             return False
         logger.debug(f'Element "{selector}" is clickable')
         return True
+    
+    def click_at_left_top_element_corner(self, selector):
+        try:
+            element = self.find_clickable_element(selector)
+            webdriver.ActionChains(self.browser).move_to_element_with_offset(element, xoffset=10, yoffset=10).click().perform()
+        except WebDriverException:
+            logger.error(f'Cannot click at left top corner of element "{selector}"')
+            raise
+        logger.debug(f'Element "{selector}" clicked at at left top corner')
+    

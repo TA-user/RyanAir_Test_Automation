@@ -6,15 +6,18 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
-from config import Urls, DefaultCreds
+from config import DefaultCreds
 from tests.pages.main_page import MainPage, MainPageCarHireTab, MainPageSearchHotelsTab, MainPageSearchFlightsTab
 from utils.assertions import Assertions
+from tests.pages.trip_viewer_page import TripViewerPageFlightsTab, TripViewerPageSeatsTab, TripViewerPageBagsTab, \
+    TripViewerPageExtrasTab, TripViewerPage
+from tests.pages.payment_page import PaymentPage
 
 
 def pytest_addoption(parser):
     parser.addoption("--browser_name", action="store", default="chrome",
                      help="Choose browser: chrome or firefox or edge")
-    parser.addoption('--user',
+    parser.addoption('--username',
                      action='store',
                      default='None',
                      help="Set a username",
@@ -67,41 +70,71 @@ def pytest_runtest_makereport(item, call):
 
 
 @pytest.fixture(scope="module")
-def main_page(browser):
-    return MainPage(browser=browser, url=Urls.MAIN_PAGE_URL)
-
-
-@pytest.fixture(scope="module")
-def main_page_search_flights_tab(browser):
-    return MainPageSearchFlightsTab(browser=browser, url=browser.current_url)
-
-
-@pytest.fixture(scope="module")
-def main_page_car_hire_tab(browser):
-    return MainPageCarHireTab(browser=browser, url=browser.current_url)
-
-
-@pytest.fixture(scope="module")
-def main_page_search_hotels_tab(browser):
-    return MainPageSearchHotelsTab(browser=browser, url=browser.current_url)
-
-
-@pytest.fixture(scope="module")
 def assertions(browser):
     return Assertions(browser=browser)
 
 
 @pytest.fixture()
-def user(request):
-    user_cmd = request.config.getoption("user")
-    if user_cmd == "None":
-        user_cmd = DefaultCreds.USERNAME
-    return user_cmd
+def username(request):
+    commandline_username = request.config.getoption("username")
+    if commandline_username == "None":
+        commandline_username = DefaultCreds.USERNAME
+    return commandline_username
 
 
 @pytest.fixture()
 def password(request):
-    password_cmd = request.config.getoption("password")
-    if password_cmd == "None":
-        password_cmd = DefaultCreds.PASSWORD
-    return password_cmd
+    commandline_password = request.config.getoption("password")
+    if commandline_password == "None":
+        commandline_password = DefaultCreds.PASSWORD
+    return commandline_password
+
+
+@pytest.fixture(scope="module")
+def main_page(browser):
+    return MainPage(browser=browser)
+
+
+@pytest.fixture(scope="module")
+def main_page_search_flights_tab(browser):
+    return MainPageSearchFlightsTab(browser=browser)
+
+
+@pytest.fixture(scope="module")
+def main_page_car_hire_tab(browser):
+    return MainPageCarHireTab(browser=browser)
+
+
+@pytest.fixture(scope="module")
+def main_page_search_hotels_tab(browser):
+    return MainPageSearchHotelsTab(browser=browser)
+
+
+@pytest.fixture(scope="module")
+def trip_viewer_page_flights_tab(browser):
+    return TripViewerPageFlightsTab(browser=browser)
+
+
+@pytest.fixture(scope="module")
+def trip_viewer_page_seats_tab(browser):
+    return TripViewerPageSeatsTab(browser=browser)
+
+
+@pytest.fixture(scope="module")
+def trip_viewer_page_bags_tab(browser):
+    return TripViewerPageBagsTab(browser=browser)
+
+
+@pytest.fixture(scope="module")
+def trip_viewer_page_extras_tab(browser):
+    return TripViewerPageExtrasTab(browser=browser)
+
+
+@pytest.fixture(scope="module")
+def trip_viewer_page(browser):
+    return TripViewerPage(browser=browser)
+
+
+@pytest.fixture(scope="module")
+def payment_page(browser):
+    return PaymentPage(browser=browser)
