@@ -68,6 +68,7 @@ def pytest_runtest_makereport(item, call):
         except Exception as e:
             print('Fail to take screen-shot: {}'.format(e))
 
+
 @pytest.fixture(scope="module")
 def assertions(browser):
     return Assertions(browser=browser)
@@ -93,39 +94,47 @@ def password(request):
 def main_page(browser):
     return MainPage(browser=browser, url=Urls.MAIN_PAGE_URL)
 
+
 @pytest.fixture(scope="module")
 def main_page_search_flights_tab(browser):
     return MainPageSearchFlightsTab(browser=browser, url=browser.current_url)
+
 
 @pytest.fixture(scope="module")
 def main_page_car_hire_tab(browser):
     return MainPageCarHireTab(browser=browser, url=browser.current_url)
 
+
 @pytest.fixture(scope="module")
 def main_page_search_hotels_tab(browser):
     return MainPageSearchHotelsTab(browser=browser, url=browser.current_url)
+
 
 @pytest.fixture(scope="module")
 def trip_viewer_page_flights_tab(browser):
     return TripViewerPageFlightsTab(browser=browser, url=browser.current_url)
 
+
 @pytest.fixture(scope="module")
 def trip_viewer_page_seats_tab(browser):
     return TripViewerPageSeatsTab(browser=browser, url=browser.current_url)
+
 
 @pytest.fixture(scope="module")
 def trip_viewer_page_bags_tab(browser):
     return TripViewerPageBagsTab(browser=browser, url=browser.current_url)
 
+
 @pytest.fixture(scope="module")
 def trip_viewer_page_extras_tab(browser):
     return TripViewerPageExtrasTab(browser=browser, url=browser.current_url)
+
 
 @pytest.fixture(scope="module")
 def trip_viewer_page(browser):
     return TripViewerPage(browser=browser, url=browser.current_url)
 
+
 @pytest.fixture(scope="module")
 def payment_page(browser):
     return PaymentPage(browser=browser, url=browser.current_url)
-
