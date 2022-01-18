@@ -118,22 +118,12 @@ class ElementInteractions:
         logger.debug(f'Element "{selector}" is clickable')
         return True
     
-    def choose_element_with_minimum_price(self, selector):
-        elements = self.find_visible_elements(selector)
-        elements_values = []
-        for element in elements:
-            value = float(element.text[1:])
-            elements_values.append(value)
-        element_dict = ({element:value for element in elements for value in elements_values})
-        minimum_element = min(element_dict, key=element_dict.get)
-        return minimum_element
-    
-    def click_at_coordinates_of_element(self, selector, x_coord, y_coord):
+    def click_at_left_top_element_corner(self, selector):
         try:
             element = self.find_clickable_element(selector)
-            webdriver.ActionChains(self.browser).move_to_element_with_offset(element, x_coord, y_coord).click().perform()
+            webdriver.ActionChains(self.browser).move_to_element_with_offset(element, xoffset=10, yoffset=10).click().perform()
         except WebDriverException:
-            logger.error(f'Cannot click at x - "{x_coord}" and y - "{y_coord}" coordinates element "{selector}"')
+            logger.error(f'Cannot click at left top corner of element "{selector}"')
             raise
-        logger.debug(f'Element "{selector}" clicked at x - "{x_coord}" and y - "{y_coord}" coordinates')
+        logger.debug(f'Element "{selector}" clicked at at left top corner')
     

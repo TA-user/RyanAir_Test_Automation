@@ -1,5 +1,4 @@
 from utils.browser_helper import ElementInteractions
-from utils.assertions import Assertions
 
 
 class BasePage:

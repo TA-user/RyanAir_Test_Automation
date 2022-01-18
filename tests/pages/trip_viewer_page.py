@@ -25,13 +25,23 @@ class TripViewerPage(BasePage):
 
 class TripViewerPageFlightsTab(BasePage):
     def choose_cheapest_depart_flight(self):
-        minimum_price_flight_card = self.element_interactions.choose_element_with_minimum_price(
-            FlightsTabLocators.FLIGHT_DEPART_PRICES)
+        flight_elements = self.element_interactions.find_visible_elements(FlightsTabLocators.FLIGHT_DEPART_PRICES)
+        elements_values = []
+        for element in flight_elements:
+            value = float(element.text[1:])
+            elements_values.append(value)
+        element_dict = ({element:value for element in flight_elements for value in elements_values})
+        minimum_price_flight_card = min(element_dict, key=element_dict.get)
         minimum_price_flight_card.click()
 
     def choose_cheapest_return_flight(self):
-        minimum_price_flight_card = self.element_interactions.choose_element_with_minimum_price(
-            FlightsTabLocators.FLIGHT_RETURN_PRICES)
+        flight_elements = self.element_interactions.find_visible_elements(FlightsTabLocators.FLIGHT_RETURN_PRICES)
+        elements_values = []
+        for element in flight_elements:
+            value = float(element.text[1:])
+            elements_values.append(value)
+        element_dict = ({element:value for element in flight_elements for value in elements_values})
+        minimum_price_flight_card = min(element_dict, key=element_dict.get)
         minimum_price_flight_card.click()
 
     def choose_light_fare_type(self):
@@ -60,9 +70,8 @@ class TripViewerPageExtrasTab(BasePage):
     def continue_order_without_extras(self):
         self.element_interactions.click_element(ExtrasTabLocators.EXTRAS_TRIP_CONTINUATION_BUTTON)
         if self.element_interactions.is_element_visible(ExtrasTabLocators.TRANSPORT_INFO_CARD):
-            self.element_interactions.click_at_coordinates_of_element(
-                ExtrasTabLocators.EXTRAS_TRANSPORT_CONTINUATION_BUTTON, 10, 10)
+            self.element_interactions.click_at_left_top_element_corner(
+                ExtrasTabLocators.EXTRAS_TRANSPORT_CONTINUATION_BUTTON)
 
 class TripViewerPageOverviewTab(BasePage):
     flight_search_date_format = "%a, %d %b"
-
