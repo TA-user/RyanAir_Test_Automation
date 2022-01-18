@@ -1,3 +1,5 @@
+import time
+
 from .base_page import BasePage
 from .main_page_locators import MainPageLocators, SearchCarsTabLocators, CalendarWidgetLocators,\
     MainPageHeaderLocators, LogInPopupLocators, SearchFlightsTabLocators

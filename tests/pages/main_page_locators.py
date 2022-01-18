@@ -20,7 +20,7 @@ class MainPageLocators:
 class MainPageHeaderLocators:
     LOG_IN_BUTTON = (By.XPATH, "//button[@aria-label='Log in']")
     LOG_OUT_BUTTON = (By.XPATH, "//a[@data-ref='header-dropdown-user__logout']")
-    USER_MENU = (By.XPATH, "//button[@data-ref='header-menu-item__toggle-button']/hp-header-menu-user")
+    USER_MENU = (By.CSS_SELECTOR, "span.ry-header__user-name")
     USER_AVATAR = (By.CSS_SELECTOR, "span.ry-header__user-avatar-container")
 
 

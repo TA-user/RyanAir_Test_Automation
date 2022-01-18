@@ -17,7 +17,7 @@ from tests.pages.payment_page import PaymentPage
 def pytest_addoption(parser):
     parser.addoption("--browser_name", action="store", default="chrome",
                      help="Choose browser: chrome or firefox or edge")
-    parser.addoption('--user',
+    parser.addoption('--username',
                      action='store',
                      default='None',
                      help="Set a username",
@@ -75,19 +75,19 @@ def assertions(browser):
 
 
 @pytest.fixture()
-def user(request):
-    user_cmd = request.config.getoption("user")
-    if user_cmd == "None":
-        user_cmd = DefaultCreds.USERNAME
-    return user_cmd
+def username(request):
+    commandline_username = request.config.getoption("username")
+    if commandline_username == "None":
+        commandline_username = DefaultCreds.USERNAME
+    return commandline_username
 
 
 @pytest.fixture()
 def password(request):
-    password_cmd = request.config.getoption("password")
-    if password_cmd == "None":
-        password_cmd = DefaultCreds.PASSWORD
-    return password_cmd
+    commandline_password = request.config.getoption("password")
+    if commandline_password == "None":
+        commandline_password = DefaultCreds.PASSWORD
+    return commandline_password
 
 
 @pytest.fixture(scope="module")

@@ -9,7 +9,7 @@ class Assertions(ElementInteractions):
     Object instance of Assertions class should initialize in BasePage class. And it would be used by perforce.
     Example usage:
     assertions.element_should_be_clickable(MainPageLocators.ADD_ITEM)
-    assertions.element_should_contain_text(MainPageHeaderLocators.USER_MENU, 'user')
+    assertions.element_should_contain_text(MainPageHeaderLocators.USER_MENU, 'username')
     """
 
     @allure.step('Verification of visibility "{1}" element')
