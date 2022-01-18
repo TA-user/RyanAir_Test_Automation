@@ -33,18 +33,12 @@ class HeaderLocators:
     BASKET_POPUP_CAR_HIRE_PRICE = (By.CSS_SELECTOR, "h4>*>.price__integers")
     BASKET_CHECKOUT_BUTTON = (By.CSS_SELECTOR, "[data-ref=basket-continue-flow__check-out]")
 
-    BASKET_DEPART_LOCATION_FIRST_FLIGHT = (By.CSS_SELECTOR,
-        "div[data-ref='outbound'] ry-flights-group-info div.flight-details span:nth-child(1)")
-    BASKET_DESTINATION_LOCATION_FIRST_FLIGHT = (By.CSS_SELECTOR,
-        "div[data-ref='outbound'] ry-flights-group-info div.flight-details span:nth-child(3)")
-    BASKET_DEPART_LOCATION_SECOND_FLIGHT = (By.CSS_SELECTOR,
-        "div[data-ref='inbound'] ry-flights-group-info div.flight-details span:nth-child(1)")
-    BASKET_DESTINATION_LOCATION_SECOND_FLIGHT = (By.CSS_SELECTOR,
-        "div[data-ref='inbound'] ry-flights-group-info div.flight-details span:nth-child(3)")
-    BASKET_FIRST_FLIGHT_DATE = (By.CSS_SELECTOR,
-        "div[data-ref='outbound'] ry-flights-group-info div.flight-segment-details span:nth-child(1)")
-    BASKET_SECOND_FLIGHT_DATE = (By.CSS_SELECTOR,
-        "div[data-ref='inbound'] ry-flights-group-info div.flight-segment-details span:nth-child(1)")
+    BASKET_DEPART_LOCATION_FIRST_FLIGHT = (By.CSS_SELECTOR, "div[data-ref='outbound'] div.flight-details span:nth-child(1)")
+    BASKET_DESTINATION_LOCATION_FIRST_FLIGHT = (By.CSS_SELECTOR, "div[data-ref='outbound'] div.flight-details span:nth-child(3)")
+    BASKET_DEPART_LOCATION_SECOND_FLIGHT = (By.CSS_SELECTOR, "div[data-ref='inbound'] div.flight-details span:nth-child(1)")
+    BASKET_DESTINATION_LOCATION_SECOND_FLIGHT = (By.CSS_SELECTOR, "div[data-ref='inbound'] div.flight-details span:nth-child(3)")
+    BASKET_FIRST_FLIGHT_DATE = (By.CSS_SELECTOR, "div[data-ref='outbound'] div.flight-segment-details span:nth-child(1)")
+    BASKET_SECOND_FLIGHT_DATE = (By.CSS_SELECTOR, "div[data-ref='inbound'] div.flight-segment-details span:nth-child(1)")
     
 
 class BagsTabLocators:
