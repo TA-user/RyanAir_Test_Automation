@@ -11,7 +11,6 @@ from tests.pages.trip_viewer_page_locators import HeaderLocators
 from tests.pages.trip_viewer_page_locators import TripPlannerLocators
 from tests.pages.trip_viewer_page_locators import OverviewTabLocators
 from tests.pages.payment_page_locators import PaymentPageLocators
-from utils.assertions import Assertions
 
 
 @pytest.fixture(scope="function")
@@ -22,12 +21,14 @@ def setup(browser, main_page, user, password):
     yield
     main_page.log_out()
 
-
+@pytest.mark.smoke
+@pytest.mark.authorization
 def test_guest_can_log_in(setup, user, assertions):
     assertions.element_should_be_visible(MainPageHeaderLocators.USER_AVATAR)
     assertions.element_should_contain_phrase(MainPageHeaderLocators.USER_MENU, user)
 
-
+@pytest.mark.smoke
+@pytest.mark.flights_order
 @pytest.mark.parametrize("depart_airport, destination_airport, depart_date, return_date, first_name, last_name",
                          Data.flights_search_data)
 def test_user_can_order_flights(browser, assertions, setup, main_page, main_page_search_flights_tab, trip_viewer_page_flights_tab,
