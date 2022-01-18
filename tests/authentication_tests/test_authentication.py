@@ -1,11 +1,11 @@
 import pytest
-
+from config import Urls
 from tests.pages.main_page_locators import MainPageHeaderLocators
 
 
 @pytest.fixture(scope="function")
 def setup(browser, main_page, username, password):
-    main_page.open()
+    main_page.open(Urls.MAIN_PAGE_URL)
     main_page.accept_cookies()
     main_page.log_in(username, password)
     yield

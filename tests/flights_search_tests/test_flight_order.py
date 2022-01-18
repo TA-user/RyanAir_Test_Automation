@@ -1,5 +1,5 @@
 import pytest
-
+from config import Urls
 from tests.data.flights_search_data import Data
 from tests.pages.payment_page_locators import PaymentPageLocators
 from tests.pages.trip_viewer_page_locators import FlightsTabLocators
@@ -10,7 +10,7 @@ from tests.pages.trip_viewer_page_locators import TripPlannerLocators
 
 @pytest.fixture(scope="function")
 def setup(browser, main_page, username, password):
-    main_page.open()
+    main_page.open(Urls.MAIN_PAGE_URL)
     main_page.accept_cookies()
     main_page.log_in(username, password)
     yield

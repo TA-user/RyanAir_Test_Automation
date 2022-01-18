@@ -3,11 +3,10 @@ from utils.assertions import Assertions
 
 
 class BasePage:
-    def __init__(self, browser, url):
+    def __init__(self, browser):
         self.browser = browser
-        self.url = url
         self.element_interactions = ElementInteractions(self.browser)
 
-    def open(self):
-        self.browser.get(self.url)
+    def open(self, url):
+        self.browser.get(url)
 

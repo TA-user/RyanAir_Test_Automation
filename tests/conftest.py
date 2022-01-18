@@ -6,7 +6,7 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
-from config import Urls, DefaultCreds
+from config import DefaultCreds
 from tests.pages.main_page import MainPage, MainPageCarHireTab, MainPageSearchHotelsTab, MainPageSearchFlightsTab
 from utils.assertions import Assertions
 from tests.pages.trip_viewer_page import TripViewerPageFlightsTab, TripViewerPageSeatsTab, TripViewerPageBagsTab, \
@@ -92,49 +92,49 @@ def password(request):
 
 @pytest.fixture(scope="module")
 def main_page(browser):
-    return MainPage(browser=browser, url=Urls.MAIN_PAGE_URL)
+    return MainPage(browser=browser)
 
 
 @pytest.fixture(scope="module")
 def main_page_search_flights_tab(browser):
-    return MainPageSearchFlightsTab(browser=browser, url=browser.current_url)
+    return MainPageSearchFlightsTab(browser=browser)
 
 
 @pytest.fixture(scope="module")
 def main_page_car_hire_tab(browser):
-    return MainPageCarHireTab(browser=browser, url=browser.current_url)
+    return MainPageCarHireTab(browser=browser)
 
 
 @pytest.fixture(scope="module")
 def main_page_search_hotels_tab(browser):
-    return MainPageSearchHotelsTab(browser=browser, url=browser.current_url)
+    return MainPageSearchHotelsTab(browser=browser)
 
 
 @pytest.fixture(scope="module")
 def trip_viewer_page_flights_tab(browser):
-    return TripViewerPageFlightsTab(browser=browser, url=browser.current_url)
+    return TripViewerPageFlightsTab(browser=browser)
 
 
 @pytest.fixture(scope="module")
 def trip_viewer_page_seats_tab(browser):
-    return TripViewerPageSeatsTab(browser=browser, url=browser.current_url)
+    return TripViewerPageSeatsTab(browser=browser)
 
 
 @pytest.fixture(scope="module")
 def trip_viewer_page_bags_tab(browser):
-    return TripViewerPageBagsTab(browser=browser, url=browser.current_url)
+    return TripViewerPageBagsTab(browser=browser)
 
 
 @pytest.fixture(scope="module")
 def trip_viewer_page_extras_tab(browser):
-    return TripViewerPageExtrasTab(browser=browser, url=browser.current_url)
+    return TripViewerPageExtrasTab(browser=browser)
 
 
 @pytest.fixture(scope="module")
 def trip_viewer_page(browser):
-    return TripViewerPage(browser=browser, url=browser.current_url)
+    return TripViewerPage(browser=browser)
 
 
 @pytest.fixture(scope="module")
 def payment_page(browser):
-    return PaymentPage(browser=browser, url=browser.current_url)
+    return PaymentPage(browser=browser)
