@@ -12,7 +12,7 @@ class TripViewerPage(BasePage):
     def open_cart(self):
         self.element_interactions.click_element(HeaderLocators.BASKET_ICON)
 
-    def close_popup(self):
+    def close_flight_confirmation_popup(self):
         if self.element_interactions.is_element_visible(HeaderLocators.FLIGHT_CONFIRMATION_POPUP):
             self.element_interactions.click_element(HeaderLocators.CLOSE_CONFIRMATION_POPUP_BUTTON)
 
