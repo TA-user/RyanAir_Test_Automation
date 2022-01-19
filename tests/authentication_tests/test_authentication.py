@@ -1,3 +1,4 @@
+import allure
 import pytest
 from config import Urls
 from tests.pages.main_page_locators import MainPageHeaderLocators
@@ -12,6 +13,8 @@ def setup(browser, main_page, username, password):
     main_page.log_out()
 
 
+@allure.feature("Authorization")
+@allure.severity(allure.severity_level.CRITICAL)
 @pytest.mark.smoke
 @pytest.mark.authorization
 def test_guest_can_log_in(setup, username, assertions):

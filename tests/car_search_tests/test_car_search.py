@@ -1,3 +1,4 @@
+import allure
 import pytest
 from tests.pages.trip_viewer_page_locators import CarHireTabLocators, OverviewTabLocators, HeaderLocators
 from tests.pages.payment_page_locators import PaymentPageLocators
@@ -13,7 +14,9 @@ class TestCarHire:
         main_page.log_in(username, password)
         yield
         main_page.log_out()
-
+    
+    @allure.feature("Car search")
+    @allure.severity(allure.severity_level.CRITICAL)
     @pytest.mark.smoke
     @pytest.mark.car_hire
     @pytest.mark.parametrize("airport, airport_code, pick_up_date, pick_up_time, drop_off_date, drop_off_time",
@@ -62,7 +65,7 @@ class TestCarHire:
         assertions.element_should_contain_value(HeaderLocators.BASKET_POPUP_CAR_HIRE_PICK_UP_LOCATION,
                                                 airport)
         # Verify the pickup and dropdown datetime on basket popup
-
+        
         assertions.element_text_should_contain_formatted_date(
             HeaderLocators.BASKET_CAR_PICK_UP_DATETIME, trip_viewer_page_header.car_hire_datetime_format,
             pick_up_date, pick_up_time)
