@@ -1,3 +1,4 @@
+import allure
 import pytest
 from config import Urls
 from tests.data.flights_search_data import Data
@@ -18,6 +19,8 @@ def setup(browser, main_page, username, password):
 
 
 class TestFlightsOrder:
+    @allure.feature("Flights order")
+    @allure.severity(allure.severity_level.CRITICAL)
     @pytest.mark.smoke
     @pytest.mark.flights_order
     @pytest.mark.parametrize("depart_airport, destination_airport, depart_date, return_date, first_name, last_name",
@@ -87,4 +90,3 @@ class TestFlightsOrder:
         assertions.element_should_contain_value(PaymentPageLocators.PASSENGER_NAME, last_name)
         
         trip_viewer_page.go_to_main()
-        
