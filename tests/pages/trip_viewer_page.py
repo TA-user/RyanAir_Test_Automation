@@ -7,6 +7,8 @@ from tests.pages.trip_viewer_page_locators import ExtrasTabLocators
 from tests.pages.trip_viewer_page_locators import TripPlannerLocators
 from tests.pages.trip_viewer_page_locators import HeaderLocators
 from tests.pages.trip_viewer_page_locators import OverviewTabLocators
+from .trip_viewer_page_locators import CarHireTabLocators
+
 
 class TripViewerPage(BasePage):
     def open_cart(self):
@@ -55,16 +57,19 @@ class TripViewerPageFlightsTab(BasePage):
         self.element_interactions.send_text_in_field(FlightsTabLocators.LAST_NAME_PASSENGER_INPUT, last_name)
         self.element_interactions.click_element(FlightsTabLocators.PASSENGERS_CONTINUATION_BUTTON)
 
+
 class TripViewerPageSeatsTab(BasePage):
     def choose_later_selection_option(self):
         self.element_interactions.click_element(SeatsTabLocators.SEATS_LATER_OPTION_BUTTON)
         self.element_interactions.click_element(SeatsTabLocators.WITHOUT_SEATS_CONTINUATION_BUTTON)
+
 
 class TripViewerPageBagsTab(BasePage):
     def choose_one_small_bag(self):
         self.element_interactions.click_element(BagsTabLocators.ONE_SMALL_BAG_RADIOBUTTON)
         self.element_interactions.click_element(BagsTabLocators.BAGS_CONTINUATION_BUTTON)
         self.element_interactions.click_element(BagsTabLocators.BAG_POPUP_DECLINE_BUTTON)
+
 
 class TripViewerPageExtrasTab(BasePage):
     def continue_order_without_extras(self):
@@ -73,5 +78,19 @@ class TripViewerPageExtrasTab(BasePage):
             self.element_interactions.click_at_left_top_element_corner(
                 ExtrasTabLocators.EXTRAS_TRANSPORT_CONTINUATION_BUTTON)
 
+
 class TripViewerPageOverviewTab(BasePage):
     flight_search_date_format = "%a, %d %b"
+    car_hire_date_format = "%a, %d %b"
+
+
+class TripViewerPageCarHireTab(BasePage):
+    search_summary_datetime_format = "%a, %d %b %Y, %H:%M"
+
+    def switch_to_getting_around_iframe(self):
+        getting_around_iframe = self.element_interactions.find_element(CarHireTabLocators.GETTING_AROUND_IFRAME)
+        self.browser.switch_to.frame(getting_around_iframe)
+
+
+class TripViewerPageHeader(BasePage):
+    car_hire_datetime_format = "%d %b %Y - %H:%M"

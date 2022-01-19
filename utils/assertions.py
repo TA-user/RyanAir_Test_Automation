@@ -29,7 +29,7 @@ class Assertions(ElementInteractions):
         
     @allure.step('Verification that text of element "{1}" is in formatted date "{2}"')
     def date_should_contain_element(self, locator, date):
-        date_object = TextFormatter.date_formatter(date)
+        date_object = TextFormatter.format_date(date)
         required_date = (date_object.day + date_object.month_name + date_object.month_number + date_object.year)
         required_element = self.find_visible_element(locator)
         element_text = required_element.text.replace(' ', '')
@@ -37,9 +37,15 @@ class Assertions(ElementInteractions):
 
     @allure.step('Verification that element contain "{1}" formatted date "{2}"')
     def element_should_contain_date(self, locator, date):
-        date_object = TextFormatter.date_formatter(date)
+        date_object = TextFormatter.format_date(date)
         required_date = (date_object.day + date_object.month_name)
         required_element = self.find_visible_element(locator)
         element_text = required_element.text.replace(' ', '')
         assert_that(element_text, description="Text of element doesn't contain given date").contains(required_date)
 
+    @allure.step('Verification that text of element "{1}" contain date "{3}" time {4} in format {2}')
+    def element_text_should_contain_formatted_date(self, locator, datetime_format: str, date: str, time: str):
+        formatted_datetime = TextFormatter.format_date_time(datetime_format, date, time)
+        required_element = self.find_visible_element(locator)
+        assert_that(required_element.text,
+                    description="Element don't contain expected formatted date").contains(formatted_datetime)

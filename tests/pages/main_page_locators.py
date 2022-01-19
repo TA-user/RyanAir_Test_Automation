@@ -15,6 +15,7 @@ class MainPageLocators:
     SEARCH_CARS_TAB = (By.XPATH, "//hp-search-widget-tab[@iconid='glyphs/cars']")
     SEARCH_FLIGHTS_TAB = (By.XPATH, "//hp-search-widget-tab[@iconid='glyphs/plane']")
     SEARCH_HOTELS_TAB = (By.XPATH, "//hp-search-widget-tab[@iconid='glyphs/hotels']")
+    CAR_HIRE_TAB = (By.CSS_SELECTOR, "button[data-ref=search-widget-tabs__car-hire]")
 
 
 class MainPageHeaderLocators:
@@ -32,6 +33,11 @@ class SearchCarsTabLocators:
     PICK_UP_FORM = (By.XPATH, "//hp-input-button[@uniqueid='pick-up-date']")
     PICK_UP_TIME_FORM = (By.XPATH, "//hp-input-button[@uniqueid='pick-up-time']")
     SEARCH_CARS_BUTTON = (By.XPATH, "//button[@data-ref='car-hire-widget__cta']")
+    ITEM_LOCATION_DROPDOWN_PATTERN = "//button/span[text()='({code})']"
+
+    @classmethod
+    def get_airport_item_in_dropdown(cls, airport_code) -> tuple:
+        return By.XPATH, cls.ITEM_LOCATION_DROPDOWN_PATTERN.format(code=airport_code)
 
 
 class SearchFlightsTabLocators:
