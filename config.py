@@ -19,6 +19,6 @@ class Capabilities:
             "enableVNC": True,
             "enableVideo": False,
             "enableLog": True,
-            "screenResolution": "1920x980x24"
+            "screenResolution": "1920x1080x24"
         }
     }
