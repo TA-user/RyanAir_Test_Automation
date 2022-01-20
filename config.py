@@ -7,5 +7,5 @@ class Urls:
 
 
 class DefaultCreds:
-    USERNAME = ""
-    PASSWORD = ""
+    USERNAME = "testuserintern@mail.ru"
+    PASSWORD = "ui89WFdd"
