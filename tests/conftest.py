@@ -35,16 +35,15 @@ def browser(request):
     browser_name = request.config.getoption("browser_name")
     browser = None
     if browser_name == "chrome":
-        browser = webdriver.Remote(command_executor="http://localhost:4444/wd/hub",
-                                   desired_capabilities=Capabilities.chrome_97_capabilities)
-    # elif browser_name == "firefox":
-    #     browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())
-    # elif browser_name == "edge":
-    #     desired_cap = {}
-    #     browser = Edge(executable_path=EdgeChromiumDriverManager().install(), desired_capabilities=desired_cap)
-    # else:
-    #     raise pytest.UsageError("--browser name should be chrome or firefox or edge")
-    browser.set_window_size(1920, 1080)
+        browser = webdriver.Chrome(executable_path=ChromeDriverManager().install())
+    elif browser_name == "firefox":
+        browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+    elif browser_name == "edge":
+        desired_cap = {}
+        browser = Edge(executable_path=EdgeChromiumDriverManager().install(), desired_capabilities=desired_cap)
+    else:
+        raise pytest.UsageError("--browser name should be chrome or firefox or edge")
+    browser.maximize_window()
     yield browser
     browser.quit()
 
