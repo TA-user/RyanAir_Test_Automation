@@ -7,6 +7,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from config import DefaultCreds
+from config import Capabilities
 from tests.pages.hotel_main_page import HotelMainPage
 from tests.pages.hotel_page import HotelPage
 from tests.pages.hotels_list_page import HotelsListPage
