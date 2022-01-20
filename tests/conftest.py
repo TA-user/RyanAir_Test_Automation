@@ -7,6 +7,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from config import DefaultCreds
+from config import Capabilities
 from tests.pages.main_page import MainPage, MainPageCarHireTab, MainPageSearchHotelsTab, MainPageSearchFlightsTab
 from utils.assertions import Assertions
 from tests.pages.trip_viewer_page import TripViewerPageFlightsTab, TripViewerPageSeatsTab, TripViewerPageBagsTab, \
@@ -34,15 +35,16 @@ def browser(request):
     browser_name = request.config.getoption("browser_name")
     browser = None
     if browser_name == "chrome":
-        browser = webdriver.Chrome(executable_path=ChromeDriverManager().install())
-    elif browser_name == "firefox":
-        browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())
-    elif browser_name == "edge":
-        desired_cap = {}
-        browser = Edge(executable_path=EdgeChromiumDriverManager().install(), desired_capabilities=desired_cap)
-    else:
-        raise pytest.UsageError("--browser name should be chrome or firefox or edge")
-    browser.maximize_window()
+        browser = webdriver.Remote(command_executor="http://localhost:4444/wd/hub",
+                                   desired_capabilities=Capabilities.chrome_97_capabilities)
+    # elif browser_name == "firefox":
+    #     browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+    # elif browser_name == "edge":
+    #     desired_cap = {}
+    #     browser = Edge(executable_path=EdgeChromiumDriverManager().install(), desired_capabilities=desired_cap)
+    # else:
+    #     raise pytest.UsageError("--browser name should be chrome or firefox or edge")
+    browser.set_window_size(1920, 980)
     yield browser
     browser.quit()
 
