@@ -4,7 +4,6 @@ from tests.pages.trip_viewer_page_locators import FlightsTabLocators
 from tests.pages.trip_viewer_page_locators import SeatsTabLocators
 from tests.pages.trip_viewer_page_locators import BagsTabLocators
 from tests.pages.trip_viewer_page_locators import ExtrasTabLocators
-from tests.pages.trip_viewer_page_locators import TripPlannerLocators
 from tests.pages.trip_viewer_page_locators import HeaderLocators
 from tests.pages.trip_viewer_page_locators import OverviewTabLocators
 from .trip_viewer_page_locators import CarHireTabLocators
@@ -32,7 +31,7 @@ class TripViewerPageFlightsTab(BasePage):
         for element in flight_elements:
             value = float(element.text[1:])
             elements_values.append(value)
-        element_dict = ({element:value for element in flight_elements for value in elements_values})
+        element_dict = ({element: value for element in flight_elements for value in elements_values})
         minimum_price_flight_card = min(element_dict, key=element_dict.get)
         minimum_price_flight_card.click()
 
@@ -42,7 +41,7 @@ class TripViewerPageFlightsTab(BasePage):
         for element in flight_elements:
             value = float(element.text[1:])
             elements_values.append(value)
-        element_dict = ({element:value for element in flight_elements for value in elements_values})
+        element_dict = ({element: value for element in flight_elements for value in elements_values})
         minimum_price_flight_card = min(element_dict, key=element_dict.get)
         minimum_price_flight_card.click()
 

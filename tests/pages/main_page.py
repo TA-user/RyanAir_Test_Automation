@@ -1,6 +1,6 @@
 from .base_page import BasePage
-from .main_page_locators import MainPageLocators, SearchCarsTabLocators, CalendarWidgetLocators,\
-    MainPageHeaderLocators, LogInPopupLocators, SearchFlightsTabLocators
+from .main_page_locators import MainPageLocators, SearchCarsTabLocators, CalendarWidgetLocators, \
+    MainPageHeaderLocators, LogInPopupLocators, SearchFlightsTabLocators, SearchHotelsTabLocators
 from utils.text_formatter import TextFormatter
 
 
@@ -25,6 +25,9 @@ class MainPage(BasePage):
     def open_search_flights_tab(self):
         self.element_interactions.click_element(MainPageLocators.SEARCH_FLIGHTS_TAB)
 
+    def open_search_hotel_tab(self):
+        self.element_interactions.click_element(MainPageLocators.SEARCH_HOTELS_TAB)
+
     def choose_date(self, date: str):
         date_nt = TextFormatter.format_date(date)
         pick_up_date_month_locator = CalendarWidgetLocators.get_calendar_month_button_locator(date_nt.month_name)
@@ -42,12 +45,12 @@ class MainPageSearchFlightsTab(MainPage):
         self.element_interactions.click_element(SearchFlightsTabLocators.SEARCH_FLIGHT_BUTTON)
 
     def choose_depart_location(self, depart_location):
-        self.element_interactions.click_element(SearchFlightsTabLocators.DEPART_LOCATION)
         self.element_interactions.send_text_in_field(SearchFlightsTabLocators.DEPART_LOCATION, depart_location)
         self.element_interactions.click_element(SearchFlightsTabLocators.LAST_ITEM_DROPDOWN_AIRPORT)
 
     def choose_destination_location(self, destination_location):
-        self.element_interactions.send_text_in_field(SearchFlightsTabLocators.DESTINATION_LOCATION, destination_location)
+        self.element_interactions.send_text_in_field(SearchFlightsTabLocators.DESTINATION_LOCATION,
+                                                     destination_location)
         self.element_interactions.click_element(SearchFlightsTabLocators.LAST_ITEM_DROPDOWN_AIRPORT)
 
     def choose_depart_date(self, date: str):
@@ -59,8 +62,24 @@ class MainPageSearchFlightsTab(MainPage):
         self.choose_date(date)
 
 
-class MainPageSearchHotelsTab(BasePage):
-    pass
+class MainPageSearchHotelsTab(MainPage):
+    def perform_hotels_search(self, destination, check_in_date, check_out_date):
+        self.choose_destination_location(destination)
+        self.choose_check_in_date(check_in_date)
+        self.choose_check_out_date(check_out_date)
+        self.element_interactions.click_element(SearchHotelsTabLocators.SEARCH_HOTEL_BUTTON)
+
+    def choose_destination_location(self, destination):
+        self.element_interactions.send_text_in_field(SearchHotelsTabLocators.DESTINATION_HOTEL_FORM, destination)
+        self.element_interactions.click_element(SearchHotelsTabLocators.FIRST_ITEM_HOTEL_DROPDOWN)
+
+    def choose_check_in_date(self, check_in_date: str):
+        self.element_interactions.click_element(SearchHotelsTabLocators.CHECK_IN_FORM)
+        self.choose_date(check_in_date)
+
+    def choose_check_out_date(self, check_out_date: str):
+        self.element_interactions.click_element(SearchHotelsTabLocators.CHECK_OUT_FORM)
+        self.choose_date(check_out_date)
 
 
 class MainPageCarHireTab(MainPage):
