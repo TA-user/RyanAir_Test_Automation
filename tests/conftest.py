@@ -48,7 +48,7 @@ def browser(request):
     #     browser = Edge(executable_path=EdgeChromiumDriverManager().install(), desired_capabilities=desired_cap)
     # else:
     #     raise pytest.UsageError("--browser name should be chrome or firefox or edge")
-    browser.set_window_size(1920, 980)
+    browser.set_window_size(1920, 1080)
     yield browser
     browser.quit()
 
