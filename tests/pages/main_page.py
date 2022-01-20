@@ -34,7 +34,6 @@ class MainPage(BasePage):
     def open_search_hotel_tab(self):
         self.element_interactions.click_element(MainPageLocators.SEARCH_HOTELS_TAB)
 
-
     @allure.step('Select given date "{1}" at calendar widget')
     def choose_date(self, date: str):
         date_nt = TextFormatter.format_date(date)
@@ -55,13 +54,13 @@ class MainPageSearchFlightsTab(MainPage):
 
     @allure.step('Type and select depart location - "{1}" in form and confirm')
     def choose_depart_location(self, depart_location):
-        self.element_interactions.click_element(SearchFlightsTabLocators.DEPART_LOCATION)
         self.element_interactions.send_text_in_field(SearchFlightsTabLocators.DEPART_LOCATION, depart_location)
         self.element_interactions.click_element(SearchFlightsTabLocators.LAST_ITEM_DROPDOWN_AIRPORT)
 
     @allure.step('Type and select destination location - "{1}" in form and confirm')
     def choose_destination_location(self, destination_location):
-        self.element_interactions.send_text_in_field(SearchFlightsTabLocators.DESTINATION_LOCATION, destination_location)
+        self.element_interactions.send_text_in_field(SearchFlightsTabLocators.DESTINATION_LOCATION,
+                                                     destination_location)
         self.element_interactions.click_element(SearchFlightsTabLocators.LAST_ITEM_DROPDOWN_AIRPORT)
 
     @allure.step('Select depart date in widget')
