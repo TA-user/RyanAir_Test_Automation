@@ -41,29 +41,17 @@ def pytest_addoption(parser):
 @pytest.fixture(scope="package")
 def browser(request):
     browser_name = request.config.getoption("browser_name")
-    selenoid_activity = request.config.getoption("selenoid")
     browser = None
-    if selenoid_activity == 'enable' and browser_name == "chrome":
-        browser = webdriver.Remote(command_executor="http://localhost:4444/wd/hub",
-                                   desired_capabilities=Capabilities.chrome_97)
-    elif selenoid_activity == 'enable' and browser_name == "firefox":
-        browser = webdriver.Remote(command_executor="http://localhost:4444/wd/hub",
-                                   desired_capabilities=Capabilities.firefox_96)
-    elif selenoid_activity == 'enable' and browser_name == "opera":
-        browser = webdriver.Remote(command_executor="http://localhost:4444/wd/hub",
-                                   desired_capabilities=Capabilities.opera_82)
-        browser.set_window_position(2, 2)
-    
-    elif selenoid_activity == 'disable' and browser_name == "chrome":
+    if browser_name == "chrome":
         browser = webdriver.Chrome(executable_path=ChromeDriverManager().install())
-    elif selenoid_activity == 'disable' and browser_name == "firefox":
+    elif browser_name == "firefox":
         browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())
-    elif selenoid_activity == 'disable' and browser_name == "opera":
-        driver = webdriver.Opera(executable_path=OperaDriverManager().install())
-    
+    elif browser_name == "edge":
+        desired_cap = {}
+        browser = Edge(executable_path=EdgeChromiumDriverManager().install(), desired_capabilities=desired_cap)
     else:
-        raise pytest.UsageError("--browser name should be chrome or firefox or opera")
-    browser.set_window_size(1920, 1080)
+        raise pytest.UsageError("--browser name should be chrome or firefox or edge")
+    browser.maximize_window()
     yield browser
     browser.quit()
 
