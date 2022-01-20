@@ -64,12 +64,10 @@ class MainPageSearchFlightsTab(MainPage):
     
     @allure.step('Select depart date in widget')
     def choose_depart_date(self, date: str):
-        self.element_interactions.click_element(SearchFlightsTabLocators.DEPART_FORM)
         self.choose_date(date)
     
     @allure.step('Select return date in widget')
     def choose_return_date(self, date: str):
-        self.element_interactions.click_element(SearchFlightsTabLocators.RETURN_FORM)
         self.choose_date(date)
 
 
@@ -102,8 +100,7 @@ class MainPageCarHireTab(MainPage):
     @allure.step('Select pick up date in widget')
     def choose_pick_up_date(self, date: str):
         self.element_interactions.click_element(SearchCarsTabLocators.PICK_UP_FORM)
-        main_page = MainPage(self.browser)
-        main_page.choose_date(date)
+        self.choose_date(date)
     
     @allure.step('Select drop off date in widget')
     def choose_drop_off_date(self, date: str):
