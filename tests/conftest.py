@@ -21,7 +21,7 @@ from tests.pages.payment_page import PaymentPage
 
 def pytest_addoption(parser):
     parser.addoption("--browser_name", action="store", default="chrome",
-                     help="Choose browser: chrome or firefox or edge")
+                     help="Choose browser: chrome or firefox or opera")
     parser.addoption('--username',
                      action='store',
                      default='None',
@@ -40,14 +40,16 @@ def browser(request):
     browser = None
     if browser_name == "chrome":
         browser = webdriver.Remote(command_executor="http://localhost:4444/wd/hub",
-                                   desired_capabilities=Capabilities.chrome_97_capabilities)
-    # elif browser_name == "firefox":
-    #     browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())
-    # elif browser_name == "edge":
-    #     desired_cap = {}
-    #     browser = Edge(executable_path=EdgeChromiumDriverManager().install(), desired_capabilities=desired_cap)
-    # else:
-    #     raise pytest.UsageError("--browser name should be chrome or firefox or edge")
+                                   desired_capabilities=Capabilities.chrome_97)
+    elif browser_name == "firefox":
+        browser = webdriver.Remote(command_executor="http://localhost:4444/wd/hub",
+                                   desired_capabilities=Capabilities.firefox_96)
+    elif browser_name == "opera":
+        browser = webdriver.Remote(command_executor="http://localhost:4444/wd/hub",
+                                   desired_capabilities=Capabilities.opera_82)
+        browser.set_window_position(2, 2)
+    else:
+        raise pytest.UsageError("--browser name should be chrome or firefox or opera")
     browser.set_window_size(1920, 1080)
     yield browser
     browser.quit()
