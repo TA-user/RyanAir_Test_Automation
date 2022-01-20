@@ -7,7 +7,11 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from config import DefaultCreds
+from tests.pages.hotel_main_page import HotelMainPage
+from tests.pages.hotel_page import HotelPage
+from tests.pages.hotels_list_page import HotelsListPage
 from tests.pages.main_page import MainPage, MainPageCarHireTab, MainPageSearchHotelsTab, MainPageSearchFlightsTab
+from tests.pages.room_booking_page import RoomBookingPage
 from utils.assertions import Assertions
 from tests.pages.trip_viewer_page import TripViewerPageFlightsTab, TripViewerPageSeatsTab, TripViewerPageBagsTab, \
     TripViewerPageExtrasTab, TripViewerPage, TripViewerPageCarHireTab, TripViewerPageOverviewTab, TripViewerPageHeader
@@ -153,3 +157,23 @@ def trip_viewer_page_overview_tab(browser):
 @pytest.fixture(scope="module")
 def trip_viewer_page_header(browser):
     return TripViewerPageHeader(browser=browser)
+
+
+@pytest.fixture(scope="module")
+def hotels_list_page(browser):
+    return HotelsListPage(browser=browser)
+
+
+@pytest.fixture(scope="module")
+def hotel_page(browser):
+    return HotelPage(browser=browser)
+
+
+@pytest.fixture(scope="module")
+def hotel_main_page(browser):
+    return HotelMainPage(browser=browser)
+
+
+@pytest.fixture(scope="module")
+def room_booking_page(browser):
+    return RoomBookingPage(browser=browser)
