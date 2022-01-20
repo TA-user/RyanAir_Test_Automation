@@ -5,16 +5,10 @@ from msedge.selenium_tools import Edge
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
-from webdriver_manager.opera import OperaDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from config import DefaultCreds
 from config import Capabilities
-from tests.pages.hotel_main_page import HotelMainPage
-from tests.pages.hotel_page import HotelPage
-from tests.pages.hotels_list_page import HotelsListPage
-from config import Capabilities
 from tests.pages.main_page import MainPage, MainPageCarHireTab, MainPageSearchHotelsTab, MainPageSearchFlightsTab
-from tests.pages.room_booking_page import RoomBookingPage
 from utils.assertions import Assertions
 from tests.pages.trip_viewer_page import TripViewerPageFlightsTab, TripViewerPageSeatsTab, TripViewerPageBagsTab, \
     TripViewerPageExtrasTab, TripViewerPage, TripViewerPageCarHireTab, TripViewerPageOverviewTab, TripViewerPageHeader
@@ -23,9 +17,7 @@ from tests.pages.payment_page import PaymentPage
 
 def pytest_addoption(parser):
     parser.addoption("--browser_name", action="store", default="chrome",
-                     help="Choose browser: chrome or firefox or opera")
-    parser.addoption("--launch", action="store", default="selenoid",
-                     help="To run tests on local machine type disable")
+                     help="Choose browser: chrome or firefox or edge")
     parser.addoption('--username',
                      action='store',
                      default='None',
@@ -43,15 +35,6 @@ def browser(request):
     browser_name = request.config.getoption("browser_name")
     browser = None
     if browser_name == "chrome":
-        browser = webdriver.Chrome(executable_path=ChromeDriverManager().install())
-    elif browser_name == "firefox":
-        browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())
-    elif browser_name == "edge":
-        desired_cap = {}
-        browser = Edge(executable_path=EdgeChromiumDriverManager().install(), desired_capabilities=desired_cap)
-    else:
-        raise pytest.UsageError("--browser name should be chrome or firefox or edge")
-    browser.maximize_window()
         browser = webdriver.Remote(command_executor="http://localhost:4444/wd/hub",
                                    desired_capabilities=Capabilities.chrome_97_capabilities)
     # elif browser_name == "firefox":
