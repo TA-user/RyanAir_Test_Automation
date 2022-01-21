@@ -73,20 +73,24 @@ class MainPageSearchFlightsTab(MainPage):
 
 
 class MainPageSearchHotelsTab(MainPage):
+    @allure.step('Perform complex action of hotel search')
     def perform_hotels_search(self, destination, check_in_date, check_out_date):
         self.choose_destination_location(destination)
         self.choose_check_in_date(check_in_date)
         self.choose_check_out_date(check_out_date)
         self.element_interactions.click_element(SearchHotelsTabLocators.SEARCH_HOTEL_BUTTON)
 
+    @allure.step('Select destination location in widget')
     def choose_destination_location(self, destination):
         self.element_interactions.send_text_in_field(SearchHotelsTabLocators.DESTINATION_HOTEL_FORM, destination)
         self.element_interactions.click_element(SearchHotelsTabLocators.FIRST_ITEM_HOTEL_DROPDOWN)
 
+    @allure.step('Select check in date in widget')
     def choose_check_in_date(self, check_in_date: str):
         self.element_interactions.click_element(SearchHotelsTabLocators.CHECK_IN_FORM)
         self.choose_date(check_in_date)
 
+    @allure.step('Select check out date in widget')
     def choose_check_out_date(self, check_out_date: str):
         self.element_interactions.click_element(SearchHotelsTabLocators.CHECK_OUT_FORM)
         self.choose_date(check_out_date)
