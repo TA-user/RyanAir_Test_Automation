@@ -15,7 +15,7 @@ class DefaultCreds:
 
 
 class Capabilities:
-    __log_name = (str(datetime.now())[2:16]).replace(':', '')
+    __log_name = ('selenoid' + str(datetime.now())[2:16]).replace(':', '')
     
     chrome_97 = {
         "browserName": "chrome",

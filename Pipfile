@@ -11,6 +11,7 @@ pytest = "*"
 selenium = "*"
 webdriver-manager = "*"
 loguru = "*"
+pytest-xdist = "*"
 
 [dev-packages]
 

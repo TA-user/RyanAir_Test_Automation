@@ -5,10 +5,17 @@ from msedge.selenium_tools import Edge
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
+from webdriver_manager.opera import OperaDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from config import DefaultCreds
 from config import Capabilities
+from config import Capabilities
+from tests.pages.hotel_main_page import HotelMainPage
+from tests.pages.hotel_page import HotelPage
+from tests.pages.hotels_list_page import HotelsListPage
+from config import Capabilities
 from tests.pages.main_page import MainPage, MainPageCarHireTab, MainPageSearchHotelsTab, MainPageSearchFlightsTab
+from tests.pages.room_booking_page import RoomBookingPage
 from utils.assertions import Assertions
 from tests.pages.trip_viewer_page import TripViewerPageFlightsTab, TripViewerPageSeatsTab, TripViewerPageBagsTab, \
     TripViewerPageExtrasTab, TripViewerPage, TripViewerPageCarHireTab, TripViewerPageOverviewTab, TripViewerPageHeader
@@ -17,7 +24,9 @@ from tests.pages.payment_page import PaymentPage
 
 def pytest_addoption(parser):
     parser.addoption("--browser_name", action="store", default="chrome",
-                     help="Choose browser: chrome or firefox or edge")
+                     help="Choose browser: chrome or firefox or opera")
+    parser.addoption("--launch_mode", action="store", default="selenoid",
+                     help="To run tests on local machine type local")
     parser.addoption('--username',
                      action='store',
                      default='None',
@@ -33,17 +42,31 @@ def pytest_addoption(parser):
 @pytest.fixture(scope="package")
 def browser(request):
     browser_name = request.config.getoption("browser_name")
-    browser = None
-    if browser_name == "chrome":
+    launch_mode = request.config.getoption("launch_mode")
+    if launch_mode == 'selenoid' and browser_name == "chrome":
+        browser = webdriver.Remote(
+            command_executor="http://localhost:4444/wd/hub", desired_capabilities=Capabilities.chrome_97)
+        browser.set_window_size(1920, 1080)
+    elif launch_mode == 'selenoid' and browser_name == "firefox":
+        browser = webdriver.Remote(
+            command_executor="http://localhost:4444/wd/hub", desired_capabilities=Capabilities.firefox_96)
+        browser.set_window_size(1920, 1080)
+    elif launch_mode == 'selenoid' and browser_name == "opera":
+        browser = webdriver.Remote(
+            command_executor="http://localhost:4444/wd/hub", desired_capabilities=Capabilities.opera_82)
+        browser.set_window_size(1920, 1080)
+        browser.set_window_position(2, 2)
+    
+    elif launch_mode == 'local' and browser_name == "chrome":
         browser = webdriver.Chrome(executable_path=ChromeDriverManager().install())
-    elif browser_name == "firefox":
+    elif launch_mode == 'local' and browser_name == "firefox":
         browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())
-    elif browser_name == "edge":
-        desired_cap = {}
-        browser = Edge(executable_path=EdgeChromiumDriverManager().install(), desired_capabilities=desired_cap)
+    elif launch_mode == 'local' and browser_name == "opera":
+        browser = webdriver.Opera(executable_path=OperaDriverManager().install())
+    
     else:
-        raise pytest.UsageError("--browser name should be chrome or firefox or edge")
-    browser.maximize_window()
+        raise pytest.UsageError("--browser name should be chrome or firefox or opera")
+    
     yield browser
     browser.quit()
 
