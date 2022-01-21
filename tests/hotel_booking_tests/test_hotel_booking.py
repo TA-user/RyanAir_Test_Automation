@@ -1,3 +1,4 @@
+import allure
 import pytest
 from config import Urls
 from tests.data.hotel_booking_data import Data
@@ -16,6 +17,8 @@ def setup(browser, main_page, hotel_main_page, username, password):
 
 
 class TestHotelBooking:
+    @allure.feature("Hotel booking")
+    @allure.severity(allure.severity_level.CRITICAL)
     @pytest.mark.smoke
     @pytest.mark.hotel_booking
     @pytest.mark.parametrize("destination, check_in_date, check_out_date", Data.hotel_booking_data)
