@@ -54,6 +54,7 @@ class MainPageSearchFlightsTab(MainPage):
 
     @allure.step('Type and select depart location - "{1}" in form and confirm')
     def choose_depart_location(self, depart_location):
+        self.element_interactions.click_element(SearchFlightsTabLocators.DEPART_LOCATION)
         self.element_interactions.send_text_in_field(SearchFlightsTabLocators.DEPART_LOCATION, depart_location)
         self.element_interactions.click_element(SearchFlightsTabLocators.LAST_ITEM_DROPDOWN_AIRPORT)
 

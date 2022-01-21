@@ -60,7 +60,8 @@ class ExtrasTabLocators:
     EXTRAS_TRANSPORT_CONTINUATION_BUTTON = (By.CSS_SELECTOR,
                                             "parking-container + div + button.app-container__cta.ry-button--gradient-yellow.ry-button--large")
     TRANSPORT_INFO_CARD = (By.CSS_SELECTOR, "transfer-card transport-info-card")
-    DECLINE_POPUP_EXTRAS_BUTTON = (By.CSS_SELECTOR, "button.enhanced-takeover__product-dismiss-cta")
+    DECLINE_POPUP_EXTRAS_BUTTON = (By.CSS_SELECTOR, 
+                                   "div[data-ref='enhanced-takeover-desktop__INFLIGHT_ENHANCED_TAKEOVER'] button[color='anchor-blue']")
 
 
 class SeatsTabLocators:

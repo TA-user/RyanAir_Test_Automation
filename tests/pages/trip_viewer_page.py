@@ -85,6 +85,8 @@ class TripViewerPageBagsTab(BasePage):
 class TripViewerPageExtrasTab(BasePage):
     @allure.step('Go to proceed order without extra additions')
     def continue_order_without_extras(self):
+        if self.element_interactions.is_element_visible(ExtrasTabLocators.DECLINE_POPUP_EXTRAS_BUTTON):
+            self.element_interactions.click_element(ExtrasTabLocators.DECLINE_POPUP_EXTRAS_BUTTON)
         self.element_interactions.click_element(ExtrasTabLocators.EXTRAS_TRIP_CONTINUATION_BUTTON)
         if self.element_interactions.is_element_visible(ExtrasTabLocators.TRANSPORT_INFO_CARD):
             self.element_interactions.click_at_left_top_element_corner(
