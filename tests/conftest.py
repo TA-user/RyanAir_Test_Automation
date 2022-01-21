@@ -1,12 +1,13 @@
-import os
-
 import allure
+import os
 import pytest
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.opera import OperaDriverManager
-
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
+from webdriver_manager.opera import OperaDriverManager
+from utils.assertions import Assertions
 from config import Capabilities
 from config import DefaultCreds
 from tests.pages.hotel_main_page import HotelMainPage
@@ -17,7 +18,6 @@ from tests.pages.payment_page import PaymentPage
 from tests.pages.room_booking_page import RoomBookingPage
 from tests.pages.trip_viewer_page import TripViewerPageFlightsTab, TripViewerPageSeatsTab, TripViewerPageBagsTab, \
     TripViewerPageExtrasTab, TripViewerPage, TripViewerPageCarHireTab, TripViewerPageOverviewTab, TripViewerPageHeader
-from utils.assertions import Assertions
 
 
 def pytest_addoption(parser):
