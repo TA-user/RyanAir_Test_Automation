@@ -22,9 +22,9 @@ from tests.pages.trip_viewer_page import TripViewerPageFlightsTab, TripViewerPag
 
 def pytest_addoption(parser):
     parser.addoption("--browser_name", action="store", default="chrome",
-                     help="Choose browser: chrome or firefox or opera")
+                     help="Choose browser:chrome,firefox,opera or all. Options 'all' - only for selenoid launch mode")
     parser.addoption("--launch_mode", action="store", default="selenoid",
-                     help="To run tests on local machine type local")
+                     help="To run tests on local machine type local. Default - selenoid launch mode")
     parser.addoption('--username',
                      action='store',
                      default='None',
@@ -37,10 +37,11 @@ def pytest_addoption(parser):
                      )
 
 
-@pytest.fixture(scope="package")
+@pytest.fixture(scope="package", params=[Capabilities.chrome_97, Capabilities.firefox_96, Capabilities.opera_82])
 def browser(request):
     browser_name = request.config.getoption("browser_name")
     launch_mode = request.config.getoption("launch_mode")
+
     if launch_mode == 'selenoid':
         if browser_name == "chrome":
             browser = webdriver.Remote(
@@ -52,8 +53,11 @@ def browser(request):
             browser = webdriver.Remote(
                 command_executor="http://localhost:4444/wd/hub", desired_capabilities=Capabilities.opera_82)
             browser.set_window_position(2, 2)
+        elif browser_name == 'all':
+            browser = webdriver.Remote(
+                command_executor="http://localhost:4444/wd/hub", desired_capabilities=request.param)
         browser.set_window_size(1920, 1080)
-    
+
     elif launch_mode == 'local':
         if browser_name == "chrome":
             browser = webdriver.Chrome(executable_path=ChromeDriverManager().install())
@@ -62,10 +66,10 @@ def browser(request):
         elif browser_name == "opera":
             browser = webdriver.Opera(executable_path=OperaDriverManager().install())
         browser.maximize_window()
-    
+
     else:
         raise pytest.UsageError("--browser name should be chrome or firefox or opera")
-    
+
     yield browser
     browser.quit()
 
