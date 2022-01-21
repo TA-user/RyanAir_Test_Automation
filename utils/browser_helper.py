@@ -26,7 +26,8 @@ class ElementInteractions:
 
     def find_visible_elements(self, selector):
         try:
-            elements = WebDriverWait(self.browser, self.WAIT_TIME_SECS).until(EC.visibility_of_all_elements_located(selector))
+            elements = WebDriverWait(self.browser, self.WAIT_TIME_SECS).until(
+                EC.visibility_of_all_elements_located(selector))
         except WebDriverException:
             logger.error(f'Not all elements "{selector}" are visible')
             raise
@@ -117,13 +118,38 @@ class ElementInteractions:
             return False
         logger.debug(f'Element "{selector}" is clickable')
         return True
-    
+
     def click_at_left_top_element_corner(self, selector):
         try:
             element = self.find_clickable_element(selector)
-            webdriver.ActionChains(self.browser).move_to_element_with_offset(element, xoffset=10, yoffset=10).click().perform()
+            webdriver.ActionChains(self.browser).move_to_element_with_offset(element, xoffset=10,
+                                                                             yoffset=10).click().perform()
         except WebDriverException:
             logger.error(f'Cannot click at left top corner of element "{selector}"')
             raise
         logger.debug(f'Element "{selector}" clicked at at left top corner')
-    
+
+    def refresh_page(self):
+        self.browser.refresh()
+        logger.debug(f'Page refreshed...')
+
+    def switch_to_new_tab(self):
+        new_tab = self.browser.window_handles[-1]
+        self.browser.switch_to.window(new_tab)
+        logger.debug(f'Switched to new window...')
+
+    def refresh_until_visible(self, selector):
+        class TestFailed(Exception):
+            def __init__(self, m):
+                self.message = m
+
+            def __str__(self):
+                return self.message
+
+        i = 1
+        while not self.is_element_visible(selector):
+            self.refresh_page()
+            i += 1
+            if i == 5:
+                logger.error(f'Element is still invisible after several refreshes!')
+                raise TestFailed("Element is still invisible after several refreshes!")

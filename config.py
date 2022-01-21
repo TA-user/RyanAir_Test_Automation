@@ -7,5 +7,5 @@ class Urls:
 
 
 class DefaultCreds:
-    USERNAME = ""
-    PASSWORD = ""
+    USERNAME = "type here"
+    PASSWORD = "type here"

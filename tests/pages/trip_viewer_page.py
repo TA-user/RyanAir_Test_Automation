@@ -6,7 +6,6 @@ from tests.pages.trip_viewer_page_locators import FlightsTabLocators
 from tests.pages.trip_viewer_page_locators import SeatsTabLocators
 from tests.pages.trip_viewer_page_locators import BagsTabLocators
 from tests.pages.trip_viewer_page_locators import ExtrasTabLocators
-from tests.pages.trip_viewer_page_locators import TripPlannerLocators
 from tests.pages.trip_viewer_page_locators import HeaderLocators
 from tests.pages.trip_viewer_page_locators import OverviewTabLocators
 from .trip_viewer_page_locators import CarHireTabLocators
