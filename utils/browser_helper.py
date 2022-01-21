@@ -139,12 +139,17 @@ class ElementInteractions:
         logger.debug(f'Switched to new window...')
 
     def refresh_until_visible(self, selector):
-        element_state = self.is_element_visible(selector)
+        class TestFailed(Exception):
+            def __init__(self, m):
+                self.message = m
+
+            def __str__(self):
+                return self.message
+
         i = 1
-        while element_state is False:
+        while not self.is_element_visible(selector):
             self.refresh_page()
-            element_state = self.is_element_visible(selector)
             i += 1
             if i == 5:
                 logger.error(f'Element is still invisible after several refreshes!')
-                raise
+                raise TestFailed("Element is still invisible after several refreshes!")

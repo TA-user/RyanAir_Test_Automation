@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 
 
 class HotelMainPageHeaderLocators:
-    LOG_OUT_BUTTON = (By.CSS_SELECTOR, "div.user-controls__menu > a:nth-child(3)")
+    LOG_OUT_BUTTON = (By.XPATH, "//div/a[contains(text(),'Log out')]")
     USER_MENU = (By.CSS_SELECTOR, "button.user-controls__user-btn")
 
 
