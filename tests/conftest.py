@@ -5,6 +5,7 @@ from msedge.selenium_tools import Edge
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
+from webdriver_manager.opera import OperaDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from config import DefaultCreds
 from config import Capabilities
@@ -23,6 +24,8 @@ from tests.pages.payment_page import PaymentPage
 def pytest_addoption(parser):
     parser.addoption("--browser_name", action="store", default="chrome",
                      help="Choose browser: chrome or firefox or opera")
+    parser.addoption("--launch", action="store", default="selenoid",
+                     help="To run tests on local machine type disable")
     parser.addoption('--username',
                      action='store',
                      default='None',
@@ -38,17 +41,26 @@ def pytest_addoption(parser):
 @pytest.fixture(scope="package")
 def browser(request):
     browser_name = request.config.getoption("browser_name")
+    selenoid_activity = request.config.getoption("selenoid")
     browser = None
-    if browser_name == "chrome":
+    if selenoid_activity == 'enable' and browser_name == "chrome":
         browser = webdriver.Remote(command_executor="http://localhost:4444/wd/hub",
                                    desired_capabilities=Capabilities.chrome_97)
-    elif browser_name == "firefox":
+    elif selenoid_activity == 'enable' and browser_name == "firefox":
         browser = webdriver.Remote(command_executor="http://localhost:4444/wd/hub",
                                    desired_capabilities=Capabilities.firefox_96)
-    elif browser_name == "opera":
+    elif selenoid_activity == 'enable' and browser_name == "opera":
         browser = webdriver.Remote(command_executor="http://localhost:4444/wd/hub",
                                    desired_capabilities=Capabilities.opera_82)
         browser.set_window_position(2, 2)
+    
+    elif selenoid_activity == 'disable' and browser_name == "chrome":
+        browser = webdriver.Chrome(executable_path=ChromeDriverManager().install())
+    elif selenoid_activity == 'disable' and browser_name == "firefox":
+        browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+    elif selenoid_activity == 'disable' and browser_name == "opera":
+        driver = webdriver.Opera(executable_path=OperaDriverManager().install())
+    
     else:
         raise pytest.UsageError("--browser name should be chrome or firefox or opera")
     browser.set_window_size(1920, 1080)

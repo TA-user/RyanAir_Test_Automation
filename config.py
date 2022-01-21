@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 class BrowserHelperSettings:
     WAIT_TIME_SECS = 10
 
@@ -12,6 +15,8 @@ class DefaultCreds:
 
 
 class Capabilities:
+    __log_name = (str(datetime.now())[2:16]).replace(':', '')
+    
     chrome_97 = {
         "browserName": "chrome",
         "browserVersion": "97.0",
@@ -19,6 +24,7 @@ class Capabilities:
             "enableVNC": True,
             "enableVideo": False,
             "enableLog": True,
+            "logName": f"{__log_name}",
             "screenResolution": "1920x1080x24"
         }
     }
@@ -29,6 +35,7 @@ class Capabilities:
             "enableVNC": True,
             "enableVideo": False,
             "enableLog": True,
+            "logName": f"{__log_name}",
             "screenResolution": "1920x1080x24"
         }
     }
@@ -39,6 +46,7 @@ class Capabilities:
             "enableVNC": True,
             "enableVideo": False,
             "enableLog": True,
+            "logName": f"{__log_name}",
             "screenResolution": "1920x1080x24"
         }
     }
