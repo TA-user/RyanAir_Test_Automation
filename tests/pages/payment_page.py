@@ -6,7 +6,8 @@ from tests.pages.payment_page_locators import PaymentPageLocators
 
 class PaymentPage(BasePage):
     car_hire_datetime_format = "%d %b %Y - %H:%M"
-    
+    flight_search_date_format = "%a %#d %b"
+
     @allure.step('Go to passenger name dropdown"')
     def go_to_passenger_info(self):
         self.element_interactions.click_element(PaymentPageLocators.PASSENGER_INFO_DROPDOWN)
