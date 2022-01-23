@@ -2,9 +2,7 @@ import allure
 import pytest
 from config import Urls
 from tests.data.flights_search_data import Data
-from tests.pages.payment_page import PaymentPage
 from tests.pages.payment_page_locators import PaymentPageLocators
-from tests.pages.trip_viewer_page import TripViewerPageFlightsTab
 from tests.pages.trip_viewer_page import TripViewerPageHeader
 from tests.pages.trip_viewer_page import TripViewerPageOverviewTab
 from tests.pages.trip_viewer_page_locators import FlightsTabLocators
@@ -42,9 +40,9 @@ class TestFlightsOrder:
         assertions.element_should_contain_value(FlightsTabLocators.ACTUAL_DESTINATION_LOCATION,
                                                 destination_airport)
         assertions.element_text_should_contain_formatted_date(
-            FlightsTabLocators.ACTUAL_DATES_DESCRIPTION, TripViewerPageFlightsTab.summary_date_format, depart_date)
+            FlightsTabLocators.ACTUAL_DATES_DESCRIPTION, trip_viewer_page_flights_tab.summary_date_format, depart_date)
         assertions.element_text_should_contain_formatted_date(
-            FlightsTabLocators.ACTUAL_DATES_DESCRIPTION, TripViewerPageFlightsTab.summary_date_format, return_date)
+            FlightsTabLocators.ACTUAL_DATES_DESCRIPTION, trip_viewer_page_flights_tab.summary_date_format, return_date)
 
         trip_viewer_page_flights_tab.choose_cheapest_depart_flight()
         trip_viewer_page_flights_tab.choose_cheapest_return_flight()
@@ -100,10 +98,10 @@ class TestFlightsOrder:
         assertions.element_should_contain_value(PaymentPageLocators.DEPART_LOCATION_SECOND_FLIGHT, destination_airport)
         assertions.element_should_contain_value(PaymentPageLocators.DESTINATION_LOCATION_SECOND_FLIGHT, depart_airport)
         assertions.element_text_should_contain_formatted_date(PaymentPageLocators.DEPART_DATE,
-                                                              PaymentPage.flight_search_date_format,
+                                                              payment_page.flight_search_date_format,
                                                               depart_date)
         assertions.element_text_should_contain_formatted_date(PaymentPageLocators.RETURN_DATE,
-                                                              PaymentPage.flight_search_date_format,
+                                                              payment_page.flight_search_date_format,
                                                               return_date)
         assertions.element_should_contain_value(PaymentPageLocators.PASSENGER_NAME, first_name)
         assertions.element_should_contain_value(PaymentPageLocators.PASSENGER_NAME, last_name)

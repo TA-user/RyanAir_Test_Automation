@@ -1,17 +1,11 @@
 import allure
 from assertpy import assert_that
+
 from utils.browser_helper import ElementInteractions
 from utils.text_formatter import TextFormatter
 
 
 class Assertions(ElementInteractions):
-    """
-    Object instance of Assertions class should initialize in BasePage class. And it would be used by perforce.
-    Example usage:
-    assertions.element_should_be_clickable(MainPageLocators.ADD_ITEM)
-    assertions.element_should_contain_text(MainPageHeaderLocators.USER_MENU, 'username')
-    """
-
     @allure.step('Verification of element "{1}" visibility')
     def element_should_be_visible(self, locator):
         element_visibility = self.is_element_visible(locator)
@@ -26,14 +20,6 @@ class Assertions(ElementInteractions):
     def element_should_contain_value(self, locator, value):
         required_element = self.find_visible_element(locator)
         assert_that(required_element.text, description="Visible element don't contain required phrase").contains(value)
-
-    @allure.step('Verification that text of element contain "{1}" formatted date "{2}"')
-    def element_should_contain_date(self, locator, date):
-        date_object = TextFormatter.format_date(date)
-        required_date = (date_object.day + date_object.month_name)
-        required_element = self.find_visible_element(locator)
-        element_text = required_element.text.replace(' ', '')
-        assert_that(element_text, description="Text of element doesn't contain given date").contains(required_date)
 
     @allure.step('Verification that text of element "{1}" contain date "{3}" in format "{2}"')
     def element_text_should_contain_formatted_date(self, locator, date_format: str, date: str):
