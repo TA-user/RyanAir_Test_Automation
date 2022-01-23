@@ -19,19 +19,21 @@ class Assertions(ElementInteractions):
     @allure.step('Verification that text of visible element "{1}" contain value - "{2}"')
     def element_should_contain_value(self, locator, value):
         required_element = self.find_visible_element(locator)
-        assert_that(required_element.text, description="Visible element don't contain required phrase").contains(value)
+        assert_that(required_element.text,
+                    description=f"Visible element {locator} doesn't contain required value - {value}").contains(value)
 
     @allure.step('Verification that text of element "{1}" contain date "{3}" in format "{2}"')
     def element_text_should_contain_formatted_date(self, locator, date_format: str, date: str):
         formatted_date = TextFormatter.format_date(date_format, date)
         required_element = self.find_visible_element(locator)
         assert_that(required_element.text,
-                    description="Text of element doesn't contain expected formatted date").contains(formatted_date)
+                    description=f"Text of element {locator} doesn't contain expected formatted date {date}").contains(
+            formatted_date)
 
     @allure.step('Verification that text of element "{1}" contain date "{3}" and time {4} in format "{2}"')
     def element_text_should_contain_formatted_datetime(self, locator, datetime_format: str, date: str, time: str):
         formatted_datetime = TextFormatter.format_date_time(datetime_format, date, time)
         required_element = self.find_visible_element(locator)
         assert_that(required_element.text,
-                    description="Text of element doesn't contain expected formatted datetime").contains(
+                    description=f"Text of element {locator} doesn't contain expected formatted date {date} or time {time}").contains(
             formatted_datetime)
