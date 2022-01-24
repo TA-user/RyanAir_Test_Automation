@@ -6,6 +6,7 @@ from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.support import expected_conditions as EC
 from utils.logging import Logger
 from config import BrowserHelperSettings
+from enum import Enum, IntEnum
 
 
 class ElementInteractions:
@@ -14,6 +15,10 @@ class ElementInteractions:
 
     def __init__(self, browser):
         self.browser = browser
+
+    class Tabs(Enum):
+        NEW = -1
+        MAIN = 0
 
     def find_visible_element(self, selector):
         try:
@@ -133,10 +138,10 @@ class ElementInteractions:
         self.browser.refresh()
         logger.debug(f'Page refreshed...')
 
-    def switch_to_new_tab(self):
-        new_tab = self.browser.window_handles[-1]
-        self.browser.switch_to.window(new_tab)
-        logger.debug(f'Switched to new window...')
+    def switch_to_tab(self, tab):
+        tab_id = eval(f"self.Tabs.{tab}.value")
+        self.browser.switch_to.window(self.browser.window_handles[tab_id])
+        logger.debug(f'Switched to "{tab}" tab...')
 
     def refresh_until_visible(self, selector):
         class TestFailed(Exception):
