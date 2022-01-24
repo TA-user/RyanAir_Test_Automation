@@ -3,6 +3,8 @@ import pytest
 from config import Urls
 from tests.data.flights_search_data import Data
 from tests.pages.payment_page_locators import PaymentPageLocators
+from tests.pages.trip_viewer_page import TripViewerPageHeader
+from tests.pages.trip_viewer_page import TripViewerPageOverviewTab
 from tests.pages.trip_viewer_page_locators import FlightsTabLocators
 from tests.pages.trip_viewer_page_locators import HeaderLocators
 from tests.pages.trip_viewer_page_locators import OverviewTabLocators
@@ -32,14 +34,16 @@ class TestFlightsOrder:
                                     return_date, first_name, last_name):
         main_page_search_flights_tab.perform_flights_search(depart_airport, destination_airport, depart_date,
                                                             return_date)
-        
+
         assertions.element_should_be_visible(FlightsTabLocators.FLIGHT_CARDS)
         assertions.element_should_contain_value(FlightsTabLocators.ACTUAL_DEPART_LOCATION, depart_airport)
         assertions.element_should_contain_value(FlightsTabLocators.ACTUAL_DESTINATION_LOCATION,
                                                 destination_airport)
-        assertions.element_should_contain_date(FlightsTabLocators.ACTUAL_DATES_DESCRIPTION, depart_date)
-        assertions.element_should_contain_date(FlightsTabLocators.ACTUAL_DATES_DESCRIPTION, return_date)
-        
+        assertions.element_text_should_contain_formatted_date(
+            FlightsTabLocators.ACTUAL_DATES_DESCRIPTION, trip_viewer_page_flights_tab.summary_date_format, depart_date)
+        assertions.element_text_should_contain_formatted_date(
+            FlightsTabLocators.ACTUAL_DATES_DESCRIPTION, trip_viewer_page_flights_tab.summary_date_format, return_date)
+
         trip_viewer_page_flights_tab.choose_cheapest_depart_flight()
         trip_viewer_page_flights_tab.choose_cheapest_return_flight()
         trip_viewer_page_flights_tab.choose_light_fare_type()
@@ -49,7 +53,7 @@ class TestFlightsOrder:
         trip_viewer_page_extras_tab.continue_order_without_extras()
         trip_viewer_page.close_flight_confirmation_popup()
         trip_viewer_page.open_cart()
-        
+
         assertions.element_should_be_visible(HeaderLocators.BASKET_ICON)
         assertions.element_should_be_visible(HeaderLocators.BASKET_TOTAL_PRICE)
         assertions.element_should_be_visible(TripPlannerLocators.TRIP_PLANER_SIDEBAR)
@@ -59,11 +63,20 @@ class TestFlightsOrder:
         assertions.element_should_contain_value(TripPlannerLocators.DEPART_LOCATION_SECOND_FLIGHT, depart_airport)
         assertions.element_should_contain_value(TripPlannerLocators.DESTINATION_LOCATION_SECOND_FLIGHT,
                                                 destination_airport)
-        assertions.date_should_contain_element(TripPlannerLocators.DEPART_DATE, depart_date)
-        assertions.date_should_contain_element(TripPlannerLocators.RETURN_DATE, return_date)
+
+        assertions.element_text_should_contain_formatted_date(TripPlannerLocators.DEPART_DATE,
+                                                              TripViewerPageOverviewTab.flight_search_date_format,
+                                                              depart_date)
+        assertions.element_text_should_contain_formatted_date(TripPlannerLocators.RETURN_DATE,
+                                                              TripViewerPageOverviewTab.flight_search_date_format,
+                                                              return_date)
         assertions.element_should_be_clickable(OverviewTabLocators.CHECKOUT_BUTTON)
-        assertions.element_should_contain_date(HeaderLocators.BASKET_FIRST_FLIGHT_DATE, depart_date)
-        assertions.element_should_contain_date(HeaderLocators.BASKET_SECOND_FLIGHT_DATE, return_date)
+        assertions.element_text_should_contain_formatted_date(HeaderLocators.BASKET_FIRST_FLIGHT_DATE,
+                                                              TripViewerPageHeader.flight_search_date_format,
+                                                              depart_date)
+        assertions.element_text_should_contain_formatted_date(HeaderLocators.BASKET_SECOND_FLIGHT_DATE,
+                                                              TripViewerPageHeader.flight_search_date_format,
+                                                              return_date)
         assertions.element_should_contain_value(HeaderLocators.BASKET_DEPART_LOCATION_FIRST_FLIGHT,
                                                 depart_airport)
         assertions.element_should_contain_value(HeaderLocators.BASKET_DESTINATION_LOCATION_FIRST_FLIGHT,
@@ -72,10 +85,10 @@ class TestFlightsOrder:
                                                 destination_airport)
         assertions.element_should_contain_value(HeaderLocators.BASKET_DESTINATION_LOCATION_SECOND_FLIGHT,
                                                 depart_airport)
-        
+
         trip_viewer_page.go_checkout()
         payment_page.go_to_passenger_info()
-        
+
         assertions.element_should_be_visible(PaymentPageLocators.CARD_DETAIL_FORM)
         assertions.element_should_be_visible(PaymentPageLocators.BILLING_ADDRESS_FORM)
         assertions.element_should_be_visible(PaymentPageLocators.PAY_BUTTON)
@@ -84,9 +97,13 @@ class TestFlightsOrder:
                                                 destination_airport)
         assertions.element_should_contain_value(PaymentPageLocators.DEPART_LOCATION_SECOND_FLIGHT, destination_airport)
         assertions.element_should_contain_value(PaymentPageLocators.DESTINATION_LOCATION_SECOND_FLIGHT, depart_airport)
-        assertions.element_should_contain_date(PaymentPageLocators.DEPART_DATE, depart_date)
-        assertions.element_should_contain_date(PaymentPageLocators.RETURN_DATE, return_date)
+        assertions.element_text_should_contain_formatted_date(PaymentPageLocators.DEPART_DATE,
+                                                              payment_page.flight_search_date_format,
+                                                              depart_date)
+        assertions.element_text_should_contain_formatted_date(PaymentPageLocators.RETURN_DATE,
+                                                              payment_page.flight_search_date_format,
+                                                              return_date)
         assertions.element_should_contain_value(PaymentPageLocators.PASSENGER_NAME, first_name)
         assertions.element_should_contain_value(PaymentPageLocators.PASSENGER_NAME, last_name)
-        
+
         trip_viewer_page.go_to_main()

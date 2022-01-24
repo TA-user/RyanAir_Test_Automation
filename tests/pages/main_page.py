@@ -36,8 +36,8 @@ class MainPage(BasePage):
 
     @allure.step('Select given date "{1}" at calendar widget')
     def choose_date(self, date: str):
-        date_nt = TextFormatter.format_date(date)
-        pick_up_date_month_locator = CalendarWidgetLocators.get_calendar_month_button_locator(date_nt.month_name)
+        month_name = TextFormatter.format_date("%b", date)
+        pick_up_date_month_locator = CalendarWidgetLocators.get_calendar_month_button_locator(month_name)
         self.element_interactions.click_element(pick_up_date_month_locator)
         pick_up_date_day_locator = CalendarWidgetLocators.get_calendar_day_button_locator(date)
         self.element_interactions.click_element(pick_up_date_day_locator)

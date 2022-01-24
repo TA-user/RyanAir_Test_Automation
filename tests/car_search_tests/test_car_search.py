@@ -36,10 +36,10 @@ class TestCarHire:
         assertions.element_should_contain_value(CarHireTabLocators.PICK_UP_LOCATION, airport)
         assertions.element_should_contain_value(CarHireTabLocators.PICK_UP_LOCATION, airport_code)
         # Verify pick_up and drop_off dates and time on trip viewer page
-        assertions.element_text_should_contain_formatted_date(
+        assertions.element_text_should_contain_formatted_datetime(
             CarHireTabLocators.PICK_UP_DATE_TIME, trip_viewer_page_car_hire_tab.search_summary_datetime_format,
             pick_up_date, pick_up_time)
-        assertions.element_text_should_contain_formatted_date(
+        assertions.element_text_should_contain_formatted_datetime(
             CarHireTabLocators.DROP_OFF_DATE_TIME, trip_viewer_page_car_hire_tab.search_summary_datetime_format,
             drop_off_date, drop_off_time)
         assertions.element_should_be_visible(CarHireTabLocators.TOTAL_PRICE)
@@ -50,10 +50,10 @@ class TestCarHire:
         # Verify the airport name to be correct
         assertions.element_should_contain_value(OverviewTabLocators.TRIP_PLANNER_SIDEBAR_PICK_UP_LOCATION, airport)
         # Verify pick_up and drop_off dates and time on overview tab of trip viewer page
-        assertions.element_text_should_contain_formatted_date(
+        assertions.element_text_should_contain_formatted_datetime(
             OverviewTabLocators.TRIP_PLANNER_SIDEBAR_PICK_UP_DATE, trip_viewer_page_overview_tab.car_hire_date_format,
             pick_up_date, pick_up_time)
-        assertions.element_text_should_contain_formatted_date(
+        assertions.element_text_should_contain_formatted_datetime(
             OverviewTabLocators.TRIP_PLANNER_SIDEBAR_DROP_OFF_DATE, trip_viewer_page_overview_tab.car_hire_date_format,
             drop_off_date, drop_off_time)
         assertions.element_should_contain_value(OverviewTabLocators.TRIP_PLANNER_SIDEBAR_PICK_UP_TIME,
@@ -66,10 +66,10 @@ class TestCarHire:
                                                 airport)
         # Verify the pickup and dropdown datetime on basket popup
         
-        assertions.element_text_should_contain_formatted_date(
+        assertions.element_text_should_contain_formatted_datetime(
             HeaderLocators.BASKET_CAR_PICK_UP_DATETIME, trip_viewer_page_header.car_hire_datetime_format,
             pick_up_date, pick_up_time)
-        assertions.element_text_should_contain_formatted_date(
+        assertions.element_text_should_contain_formatted_datetime(
             HeaderLocators.BASKET_CAR_DROP_OFF_DATETIME, trip_viewer_page_header.car_hire_datetime_format,
             drop_off_date, drop_off_time)
         assertions.element_should_be_visible(HeaderLocators.BASKET_POPUP_CAR_HIRE_PRICE)
@@ -83,10 +83,10 @@ class TestCarHire:
         # Verify the pickup location
         assertions.element_should_contain_value(PaymentPageLocators.CAR_PICK_UP_LOCATION, airport)
         # Verify the pickup and dropdown datetime
-        assertions.element_text_should_contain_formatted_date(
+        assertions.element_text_should_contain_formatted_datetime(
             PaymentPageLocators.CAR_PICK_UP_DATETIME, payment_page.car_hire_datetime_format,
             pick_up_date, pick_up_time)
-        assertions.element_text_should_contain_formatted_date(
+        assertions.element_text_should_contain_formatted_datetime(
             PaymentPageLocators.CAR_DROP_OFF_DATETIME, payment_page.car_hire_datetime_format,
             drop_off_date, drop_off_time)
         payment_page.go_to_main_page()
