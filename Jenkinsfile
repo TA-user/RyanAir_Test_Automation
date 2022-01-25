@@ -14,7 +14,7 @@ pipeline
                 bat 'curl -L -o scm.exe https://github.com/aerokube/cm/releases/download/1.8.1/cm_windows_amd64.exe'
                 bat 'move scm.exe etc\\selenoid\\scm.exe'
 		        bat 'etc\\selenoid\\scm.exe selenoid start --vnc --args "-limit 10" --config-dir="etc\\selenoid\\"'
-		        bat 'etc\\selenoid\\scm.exe selenoid-ui start'
+// 		        bat 'etc\\selenoid\\scm.exe selenoid-ui start'
 		        bat 'etc\\selenoid\\scm.exe selenoid status'
 		        bat 'curl http://localhost:4444/status'
             }
