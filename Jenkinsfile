@@ -1,3 +1,6 @@
+pipeline
+{
+    agent any
 
     stages {
         stage('Git checkout') {
@@ -6,7 +9,7 @@
                     url: 'https://github.com/TA-user/RyanAir_Test_Automation.git'
             }
         }
-	stage('Prepare Selenoid') {
+	    stage('Prepare Selenoid') {
             steps {
                 // bat '$current = $PWD -replace "\\", "/" -replace "C", "c"'
                 bat 'curl -L -o scm.exe https://github.com/aerokube/cm/releases/download/1.8.1/cm_windows_amd64.exe'
@@ -17,7 +20,7 @@
 		        bat 'curl http://localhost:4444/status'
             }
         }
-	stage('Running tests') {
+	    stage('Running tests') {
             steps {
                 bat 'pipenv install'
                 bat 'pipenv shell'
@@ -45,3 +48,4 @@
             }
         }
     }
+}
