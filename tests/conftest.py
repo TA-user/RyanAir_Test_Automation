@@ -35,6 +35,7 @@ def pytest_addoption(parser):
                      )
 
 
+
 @pytest.fixture(scope="package", params=[Capabilities.chrome_97, Capabilities.firefox_96, Capabilities.opera_82])
 def browser(request):
     browser_name = request.config.getoption("browser_name")

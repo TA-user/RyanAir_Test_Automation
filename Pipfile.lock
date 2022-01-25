@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c30d140fce192148d56c9f3cabd58132a025571cd7eb15c4ce54635078336adb"
+            "sha256": "cc7b4d92cf1e0e898e0bd5b17d18fb621071379d717d109dd16dd76b6b416fb3"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -180,6 +180,14 @@
             "markers": "python_version >= '3.6'",
             "version": "==1.4.0"
         },
+        "pytest-rerunfailures": {
+            "hashes": [
+                "sha256:9e1e1bad51e07642c5bbab809fc1d4ec8eebcb7de86f90f1a26e6ef9de446697",
+                "sha256:d31d8e828dfd39363ad99cd390187bf506c7a433a89f15c3126c7d16ab723fe2"
+            ],
+            "index": "pypi",
+            "version": "==10.2"
+        },
         "pytest-xdist": {
             "hashes": [
                 "sha256:4580deca3ff04ddb2ac53eba39d76cb5dd5edeac050cb6fbc768b0dd712b4edf",
@@ -203,6 +211,14 @@
             ],
             "index": "pypi",
             "version": "==3.141.0"
+        },
+        "setuptools": {
+            "hashes": [
+                "sha256:2404879cda71495fc4d5cbc445ed52fdaddf352b36e40be8dcc63147cb4edabe",
+                "sha256:68eb94073fc486091447fcb0501efd6560a0e5a1839ba249e5ff3c4c93f05f90"
+            ],
+            "markers": "python_version >= '3.7'",
+            "version": "==60.5.0"
         },
         "six": {
             "hashes": [
@@ -241,11 +257,11 @@
         },
         "win32-setctime": {
             "hashes": [
-                "sha256:2b72b798fdc1d909fb3cc0d25e0be52a42f4848857e3588dd3947c6a18b42609",
-                "sha256:7964234073ad9bc7a689ef2ebe6ce931976b644fe73fd50cf7729c996b7d8385"
+                "sha256:15cf5750465118d6929ae4de4eb46e8edae9a5634350c01ba582df868e932cb2",
+                "sha256:231db239e959c2fe7eb1d7dc129f11172354f98361c4fa2d6d2d7e278baa8aad"
             ],
             "markers": "sys_platform == 'win32'",
-            "version": "==1.0.4"
+            "version": "==1.1.0"
         }
     },
     "develop": {}
