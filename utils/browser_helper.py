@@ -9,16 +9,17 @@ from config import BrowserHelperSettings
 from enum import Enum, IntEnum
 
 
+class Tabs(Enum):
+    NEW = -1
+    MAIN = 0
+
+
 class ElementInteractions:
     WAIT_TIME_SECS = BrowserHelperSettings.WAIT_TIME_SECS
     Logger.set_logger(Logger())
 
     def __init__(self, browser):
         self.browser = browser
-
-    class Tabs(Enum):
-        NEW = -1
-        MAIN = 0
 
     def find_visible_element(self, selector):
         try:
@@ -139,8 +140,7 @@ class ElementInteractions:
         logger.debug(f'Page refreshed...')
 
     def switch_to_tab(self, tab):
-        tab_id = eval(f"self.Tabs.{tab}.value")
-        self.browser.switch_to.window(self.browser.window_handles[tab_id])
+        self.browser.switch_to.window(self.browser.window_handles[tab])
         logger.debug(f'Switched to "{tab}" tab...')
 
     def refresh_until_visible(self, selector):
