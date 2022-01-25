@@ -27,8 +27,8 @@ class HeaderLocators:
     FLIGHT_CONFIRMATION_POPUP = (By.CSS_SELECTOR, "trip-basket-tooltip")
     CLOSE_CONFIRMATION_POPUP_BUTTON = (By.CSS_SELECTOR, "icon[data-ref='tooltip-close-icon']")
     BASKET_TOTAL_PRICE = (By.CSS_SELECTOR, "span.basket-total-price")
-
-    BASKET_POPUP_VIEW_DETAIL_BUTTON = (By.CSS_SELECTOR, ".exp-panel__title-tabindex-wrapper [role=button]")
+    CLOSE_TOOL_TIP_BUTTON = (By.XPATH, "//icon[@class='tooltip__close-icon']")
+    BASKET_POPUP_VIEW_DETAIL_BUTTON = (By.CSS_SELECTOR, "#ry-expansion-panel-0-header>div>div")
     BASKET_POPUP_CAR_HIRE_PICK_UP_LOCATION = (By.CSS_SELECTOR, "[data-ref$=location-pickUp]")
     BASKET_CAR_PICK_UP_DATETIME = (By.CSS_SELECTOR, "[data-ref$='date-pickUp']")
     BASKET_CAR_DROP_OFF_DATETIME = (By.CSS_SELECTOR, "[data-ref$='date-dropOff']")

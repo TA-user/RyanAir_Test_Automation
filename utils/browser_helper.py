@@ -4,12 +4,13 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchWindowException, ElementClickInterceptedException
 from utils.logging import Logger
 from config import BrowserHelperSettings
-from enum import Enum, IntEnum
+from enum import IntEnum
 
 
-class Tabs(Enum):
+class Tabs(IntEnum):
     NEW = -1
     MAIN = 0
 
@@ -43,6 +44,9 @@ class ElementInteractions:
     def find_clickable_element(self, selector):
         try:
             element = WebDriverWait(self.browser, self.WAIT_TIME_SECS).until(EC.element_to_be_clickable(selector))
+        except NoSuchWindowException:
+            self.switch_to_tab(Tabs.MAIN)
+            element = WebDriverWait(self.browser, self.WAIT_TIME_SECS).until(EC.element_to_be_clickable(selector))
         except WebDriverException:
             logger.error(f'Cannot find clickable element "{selector}"!')
             raise
@@ -72,7 +76,10 @@ class ElementInteractions:
     def click_element(self, selector):
         element = self.find_clickable_element(selector)
         try:
+            self.browser.execute_script("arguments[0].scrollIntoView({block: 'end'});", element)
             element.click()
+        except ElementClickInterceptedException:
+            self.browser.execute_script("arguments[0].click();", element)
         except WebDriverException:
             logger.error(f'Cannot click an element "{selector}"...')
             raise

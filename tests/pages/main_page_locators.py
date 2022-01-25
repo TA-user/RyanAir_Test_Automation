@@ -14,7 +14,7 @@ class MainPageLocators:
     SEARCH_CARS_TAB = (By.XPATH, "//hp-search-widget-tab[@iconid='glyphs/cars']")
     SEARCH_FLIGHTS_TAB = (By.XPATH, "//hp-search-widget-tab[@iconid='glyphs/plane']")
     SEARCH_HOTELS_TAB = (By.XPATH, "//hp-search-widget-tab[@iconid='glyphs/hotels']")
-    CAR_HIRE_TAB = (By.CSS_SELECTOR, "button[data-ref=search-widget-tabs__car-hire]")
+    CAR_HIRE_TAB = (By.CSS_SELECTOR, "button.search-widget-tabs__button:nth-child(2)")
 
 
 class MainPageHeaderLocators:
