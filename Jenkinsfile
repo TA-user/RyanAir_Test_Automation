@@ -5,7 +5,7 @@ pipeline
     stages {
         stage('Git checkout') {
             steps {
-                git branch: 'es/jenkins',
+                git branch: 'es/jenkinsfile',
                     url: 'https://github.com/TA-user/RyanAir_Test_Automation.git'
             }
         }
