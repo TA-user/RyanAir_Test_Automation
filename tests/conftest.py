@@ -35,7 +35,8 @@ def pytest_addoption(parser):
                      )
 
 
-@pytest.fixture(scope="package", params=[Capabilities.chrome_97, Capabilities.firefox_96, Capabilities.opera_82])
+# , params=[Capabilities.chrome_97, Capabilities.firefox_96, Capabilities.opera_82])
+@pytest.fixture(scope="package")
 def browser(request):
     browser_name = request.config.getoption("browser_name")
     launch_mode = request.config.getoption("launch_mode")
@@ -51,9 +52,9 @@ def browser(request):
             browser = webdriver.Remote(
                 command_executor="http://localhost:4444/wd/hub", desired_capabilities=Capabilities.opera_82)
             browser.set_window_position(2, 2)
-        elif browser_name == 'all':
-            browser = webdriver.Remote(
-                command_executor="http://localhost:4444/wd/hub", desired_capabilities=request.param)
+        # elif browser_name == 'all':
+        #     browser = webdriver.Remote(
+        #         command_executor="http://localhost:4444/wd/hub", desired_capabilities=request.param)
         browser.set_window_size(1920, 1080)
 
     elif launch_mode == 'local':
