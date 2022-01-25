@@ -15,6 +15,7 @@ pipeline
                 bat 'move scm.exe etc\\selenoid\\scm.exe'
 		        bat 'etc\\selenoid\\scm.exe selenoid start --vnc --args "-limit 4"'
 		        bat 'etc\\selenoid\\scm.exe selenoid status'
+		        bat 'etc\\selenoid\\scm.exe selenoid-ui start'
 		        bat 'etc\\selenoid\\scm.exe selenoid-ui status'
 		        bat 'curl http://localhost:4444/status'
             }
