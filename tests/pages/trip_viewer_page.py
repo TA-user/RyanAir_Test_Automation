@@ -111,3 +111,7 @@ class TripViewerPageCarHireTab(BasePage):
 class TripViewerPageHeader(BasePage):
     car_hire_datetime_format = "%d %b %Y - %H:%M"
     flight_search_date_format = "%#d %b"
+
+    def close_basket_tool_tip(self):
+        if self.element_interactions.is_element_visible(HeaderLocators.CLOSE_TOOL_TIP_BUTTON):
+            self.element_interactions.click_element(HeaderLocators.CLOSE_TOOL_TIP_BUTTON)

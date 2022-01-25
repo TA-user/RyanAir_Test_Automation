@@ -43,8 +43,9 @@ class TestCarHire:
             CarHireTabLocators.DROP_OFF_DATE_TIME, trip_viewer_page_car_hire_tab.search_summary_datetime_format,
             drop_off_date, drop_off_time)
         assertions.element_should_be_visible(CarHireTabLocators.TOTAL_PRICE)
-        trip_viewer_page_car_hire_tab.element_interactions.click_element(CarHireTabLocators.ADD_TO_TRIP_BUTTON)
-        # Move to the trip_viewer_page_overview_tab
+        trip_viewer_page_car_hire_tab.element_interactions.click_element(
+            CarHireTabLocators.ADD_TO_TRIP_BUTTON)
+        trip_viewer_page_header.close_basket_tool_tip()
         trip_viewer_page_overview_tab.element_interactions.click_element(
             OverviewTabLocators.TRIP_PLANNER_SIDEBAR_ITENERARY_BUTTON)
         # Verify the airport name to be correct
