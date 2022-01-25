@@ -22,8 +22,7 @@
                 bat 'pipenv install'
                 bat 'pipenv shell'
                 bat 'pipenv run pip list'
-		        bat 'pipenv run python -m  pytest -n auto --username=%TEST_USER% --password=%TEST_PASSWORD%
-		        --browser_name=%BROWSER% --reruns 2 --alluredir=allure_reports'
+		        bat 'pipenv run python -m  pytest -n auto --username=%TEST_USER% --password=%TEST_PASSWORD% --browser_name=%BROWSER% --reruns 2 --alluredir=allure_reports'
             }
         }
     }
