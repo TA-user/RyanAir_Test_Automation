@@ -12,6 +12,7 @@ selenium = "*"
 webdriver-manager = "*"
 loguru = "*"
 pytest-xdist = "*"
+pytest-rerunfailures = "*"
 
 [dev-packages]
 
