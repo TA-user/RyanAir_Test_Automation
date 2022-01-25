@@ -45,11 +45,15 @@ If not - you have to install pipenv for creation virtual environment and install
 
     ``$ pip install --user pipenv``
 
-1.5) Install dependencies:
+1.5) Activate virtual environment:
+
+    ``$ pipenv shell``
+
+1.6) Install dependencies:
 
     ``$ pipenv install``
 
-1.6) Add your own credentials (**USERNAME** and **PASSWORD**) for logging to 'https://www.ryanair.com' 
+1.7) Add your own credentials (**USERNAME** and **PASSWORD**) for logging to 'https://www.ryanair.com' 
 
 There are 2 way of credentials entry:
 
@@ -61,7 +65,7 @@ a) You can type your credentials in file ``config.py``:
 
 b) OR you can enter them directly in command using options '--username' and '--password' (see example below).
 
-1.7) For executing tests with Selenoid you need to perform the following actions:
+1.8) For executing tests with Selenoid you need to perform the following actions:
 
     - Make sure you have recent Docker (https://www.docker.com/) version installed.
     - Download Configuration Manager (Selenoid quick installation binary - https://aerokube.com/cm/latest/)  
